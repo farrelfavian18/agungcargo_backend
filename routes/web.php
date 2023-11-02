@@ -1,0 +1,74 @@
+<?php
+
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ProfileController;
+use App\Models\Berita;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+
+Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(function(){
+    Route::get('/',[IndexController::class,'index'])->name('index');
+    Route::resource('/roles', RoleController::class);
+    Route::post('roles/{role}/permissions',[RoleController::class,'givePermission'])->name('roles.permissions');
+    Route::delete('roles/{role}/permissions/{permission}',[RoleController::class,'revokePermission'])->name('roles.permissions.revoke');
+    Route::resource('/permissions', PermissionController::class);
+    Route::post('/permissions/{permission}/roles',[PermissionController::class,'assignRole'])->name('permission.roles');
+    Route::delete('/permissions/{permission}/roles{role}',[PermissionController::class,'removeRole'])->name('permissions.roles.remove');
+    Route::get('/users',[UserController::class,'index'])->name('user.index');
+    Route::get('/users/{user}',[UserController::class,'show'])->name('users.show');
+    Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+    Route::post('/users/{user}/roles',[UserController::class,'assignRole'])->name('users.roles');
+    Route::delete('/users/{user}/roles{role}',[UserController::class,'removeRole'])->name('users.roles.remove');
+    Route::post('/users/{user}/permissions',[UserController::class,'givePermission'])->name('users.permissions');
+    Route::delete('/users/{user}/permission{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
+
+    // //Berita
+    // Route::get('/berita',[BeritaController::class,''])->name('');
+});
+
+Route::middleware(['auth','role:admin|user'])->group(function () {
+    // Route::get('/berita',[BeritaController::class,'index'])->name('berita.index');
+    Route::resource('/berita', BeritaController::class);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Route::get('/admin',function(){
+//     return view('admin.adminpanel');
+// })->middleware(['auth','role:admin'])->name('admin.adminpanel');
+
+// Route::get('penulis',function(){
+//     return '<h1>Hai Penulis<h1>';
+// })->middleware(['auth','verified','role:penulis|admin']);
+
+require __DIR__.'/auth.php';
