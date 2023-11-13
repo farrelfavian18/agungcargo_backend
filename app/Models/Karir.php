@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Berita extends Model
+class Karir extends Model
 {
     use HasFactory;
     protected $guarded =[];
-    // protected $primaryKey = 'id';
-    // protected $table = 'beritas';
-    protected $fillable = ['judul_berita','isi_berita','foto_berita'];
+    protected $fillable = ['nama_jabatan','lokasi','kualifikasi','deskripsi_lowongan','kategori_pekerjaan','status_loker'];
 }

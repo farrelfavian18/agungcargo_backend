@@ -5,8 +5,8 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KarirController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Berita;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +54,9 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
 
 Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::get('/berita',[BeritaController::class,'index'])->name('berita.index');
-    Route::resource('/berita', BeritaController::class);
+    Route::resource('/beritas', BeritaController::class);
+    // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
+    Route::resource('/karirs',KarirController::class);
 });
 
 Route::middleware('auth')->group(function () {

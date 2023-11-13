@@ -35,7 +35,7 @@ class BeritaController extends Controller
         $path = $request->file('foto_berita')->storeAs('images', $fileName,'public');
         $validated['foto_berita'] = '/storage/'.$path;
         Berita::create( $validated );
-        return redirect()->route('berita.index')->with('message', 'Berita Created');
+        return redirect()->route('beritas.index')->with('message', 'Berita Created');
         // $validated = $request->validate([
         //     "judul_berita"=> "required",
         //     "isi_berita"=> "required",
@@ -57,7 +57,11 @@ class BeritaController extends Controller
      */
     public function edit(Berita $berita)
     {
-        //
+        // dd($berita);
+        $berita = Berita::find( $berita->id );
+        // $berita = Berita::all();
+        // $berita = Berita::findOrFail($berita);
+        return view ('berita.edit')->with('berita', $berita);
     }
 
     /**
@@ -65,7 +69,16 @@ class BeritaController extends Controller
      */
     public function update(Request $request, Berita $berita)
     {
-        //
+        $validated = $request->validate([
+            'judul_berita' => 'required',
+            'isi_berita' => 'required',
+            'foto_berita' => 'required'
+        ]);
+        $fileName = time().$request->file('foto_berita')->getClientOriginalName();
+        $path = $request->file('foto_berita')->storeAs('images', $fileName,'public');
+        $validated['foto_berita'] = '/storage/'.$path;
+        $berita->update( $validated);
+        return to_route('berita.index')->with('message','Berita updated');
     }
 
     /**

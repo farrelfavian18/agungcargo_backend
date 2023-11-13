@@ -235,11 +235,20 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'berita.index' ? 'active' : '' }}"
-                                href="{{ url('/berita') }}">
+                            <a class="nav-link {{ Request::route()->getName() == 'beritas.index' ? 'active' : '' }}"
+                                href="{{ url('/beritas') }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Berita
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'karirs.index' ? 'active' : '' }}"
+                                href="{{ url('/karirs') }}">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Karir
                                 </p>
                             </a>
                         </li>
