@@ -78,7 +78,7 @@ class BeritaController extends Controller
         $path = $request->file('foto_berita')->storeAs('images', $fileName,'public');
         $validated['foto_berita'] = '/storage/'.$path;
         $berita->update( $validated);
-        return to_route('berita.index')->with('message','Berita updated');
+        return to_route('beritas.index')->with('message','Berita updated');
     }
 
     /**

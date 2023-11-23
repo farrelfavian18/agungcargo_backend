@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KarirController;
+use App\Http\Controllers\MasterBannerController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +22,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
+// Route::get('/dashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+
+Route::get('/admindashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+
+Route::get('/dashboard', function () {
+    $masterbanner = DB::table('master_banners')->get();
+    return view('landingpage.index',[
+        'masterbanner' => $masterbanner
+    ]);
+})->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+
+Route::get('/', function () {
+    $masterbanner = DB::table('master_banners')->get();
+    return view('landingpage.index',[
+        'masterbanner' => $masterbanner
+    ]);
+});
+
+Route::get('/kontak', function () {
+    return view('landingpage.kontak');
+});
+
+Route::get('/cektarif', function () {
+    return view('landingpage.cektarif');
+});
+
+// Route::get('/landingpage', function () {
+//     $masterbanner = DB::table('master_banners')->get();
+//     return view('landingpage',[
+//         'masterbanner' => $masterbanner
+//     ]);
+// });
+
 
 Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(function(){
     Route::get('/',[IndexController::class,'index'])->name('index');
@@ -57,6 +93,7 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::resource('/beritas', BeritaController::class);
     // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
     Route::resource('/karirs',KarirController::class);
+    Route::resource('/masterbanner',MasterBannerController::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -33,7 +33,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="kategori_pekerjaan">Isi Berita</label>
+                <label for="kategori_pekerjaan">Kategori Pekerjaan</label>
                 <input type="text" id="kategori_pekerjaan" name="kategori_pekerjaan" class="form-control">
                 @error('kategori_pekerjaan')
                     <span style="color:Red">{{ $message }}</span>

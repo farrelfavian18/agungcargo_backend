@@ -48,7 +48,7 @@ class KarirController extends Controller
     public function edit(Karir $karir)
     {
         $karir = Karir::find($karir->id);
-        return view ('karirs.edit')->with('berita', $karir);
+        return view ('karir.edit')->with('karir', $karir);
     }
 
     /**

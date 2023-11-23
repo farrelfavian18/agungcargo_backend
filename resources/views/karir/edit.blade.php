@@ -1,35 +1,52 @@
 @extends('layout.adminpanel')
-@section('title', 'Edit Berita')
+@section('title', 'Edit Karir')
 @section('content')
     <div class="card-body">
         {{-- <form action="{{ route('beritas.update') }}" method="POST" enctype="multipart/form-data"> --}}
-        <form action="{{ route('beritas.update', $berita) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('karirs.update', $karir) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="judul_berita">Judul Berita</label>
-                <input type="text" id="judul_berita" name="judul_berita" class="form-control"
-                    value="{{ $berita->judul_berita }}">
-                @error('judul_berita')
+                <label for="nama_jabatan">Nama_Jabatan</label>
+                <input type="text" id="nama_jabatan" name="nama_jabatan" class="form-control"
+                    value="{{ $karir->nama_jabatan }}">
+                @error('nama_jabatan')
                     <span style="color:Red">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="isi_berita">Isi Berita</label>
-                <input type="text" id="isi_berita" name="isi_berita" class="form-control"
-                    value="{{ $berita->isi_berita }}">
-                @error('isi_berita')
+                <label for="lokasi">Lokasi</label>
+                <input type="text" id="lokasi" name="lokasi" class="form-control" value="{{ $karir->lokasi }}">
+                @error('lokasi')
                     <span style="color:Red">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
-                <label for="isi_berita">Foto Berita</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="foto_berita" id="foto_berita">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                    </div>
-                </div>
+                <label for="deskripsi_lowongan">Deskripsi Lowongan</label>
+                <input type="text" id="deskripsi_lowongan" name="deskripsi_lowongan" class="form-control"
+                    value="{{ $karir->deskripsi_lowongan }}">
+                @error('deskripsi_lowongan')
+                    <span style="color:Red">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="kategori_pekerjaan">Kategori Pekerjaan</label>
+                <input type="text" id="kategori_pekerjaan" name="kategori_pekerjaan" class="form-control"
+                    value="{{ $karir->kategori_pekerjaan }}">
+                @error('kategori_pekerjaan')
+                    <span style="color:Red">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="status_loker">Status Loker</label>
+                <label>{{ $karir->status_pekerjaan }}</label>
+                <select name="status_loker" class="form-control">
+                    <option value="Aktif">Aktif</option>
+                    <option value="Non-aktif">Non-Aktif</option>
+                </select>
+                @error('status_loker')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit Edit</button>

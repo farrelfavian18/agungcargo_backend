@@ -252,7 +252,24 @@
                                 </p>
                             </a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'masterbanner.index' ? 'active' : '' }}"
+                                href="{{ url('/masterbanner') }}">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Master Banner
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::url() == '/dashboard' ? 'active' : '' }}"
+                                href="{{ url('/dashboard') }}">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Landing Page
+                                </p>
+                            </a>
+                        </li>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
