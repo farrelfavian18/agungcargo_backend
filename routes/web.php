@@ -52,6 +52,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/karir', function () {
+    $karirs = DB::table('karirs')->get();
+    return view('landingpage.karir',[
+        'karirs' =>$karirs
+    ]);
+});
+
 Route::get('/kontak', function () {
     return view('landingpage.kontak');
 });
