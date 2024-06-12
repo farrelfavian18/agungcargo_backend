@@ -55,7 +55,7 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="">Home</a></li>
+                    <li><a class="nav-link scrollto active" href="{{ route('dashboard') }}">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
                     <li class="dropdown"><a href="#"><span>Layanan</span><i class="bi bi-chevron-down"></i></a>
                         <ul>

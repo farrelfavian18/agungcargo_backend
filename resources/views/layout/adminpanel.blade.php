@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminPanel|Agung Cargo</title>
+    <title>Agung Cargo|Kepegawaian</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -149,11 +149,11 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #5972b4 ">
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
                 {{-- <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">Agung Cargo | Admin Panel</span>
+                <span class="brand-text font-weight-light">Agung Cargo|Kepegawaian</span>
             </a>
 
             <!-- Sidebar -->
@@ -230,11 +230,20 @@
                                 href="{{ url('/admin/users') }}">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
-                                    Users
+                                    Akun
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'datakaryawan.index' ? 'active' : '' }}"
+                                href="{{ url('/datakaryawan') }}">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Data Karyawan
+                                </p>
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'beritas.index' ? 'active' : '' }}"
                                 href="{{ url('/beritas') }}">
                                 <i class="nav-icon fas fa-table"></i>
@@ -242,7 +251,7 @@
                                     Berita
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'karirs.index' ? 'active' : '' }}"
                                 href="{{ url('/karirs') }}">

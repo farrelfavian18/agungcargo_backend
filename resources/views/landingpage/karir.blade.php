@@ -1,7 +1,7 @@
 @include('landingpage.header')
 {{-- <?php include 'header.php'; ?> --}}
 
-<div style="background-image: url('{{ asset('img/karir.jpg') }}'); background-repeat: repeat-space; padding-top:260px; ">
+<div style="background-image: url({{ asset('img/karir.jpg') }}); background-repeat: repeat-space; padding-top:260px; ">
     <div class="container" style="top:-140px; position:relative;">
         <h3>Join With Us.</h3>
         <p>Mari berkarir bersama kami.</p>

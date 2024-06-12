@@ -37,7 +37,7 @@
 
 
 <!-- =========================== FORM CEK TARIF ================================================= -->
-<div class="container">
+{{-- <div class="container">
     <div id="cektarif" class="card">
 
         <div class="card-body">
@@ -95,7 +95,7 @@
 
     </div>
 </div>
-</div>
+</div> --}}
 
 <!-- =========================== FORM CEK TARIF END ================================================= -->
 
@@ -167,8 +167,8 @@
                     <img src="{{ asset('img/about.jpg') }}" width="85%" class="img-fluid" alt=""
                         style="border-radius: 15px; opacity: 80%;">
                 </div>
-                <div class="col-lg-6 pt-0 pt-lg-0 content d-flex flex-column justify-content-center"
-                    data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-6 pt-0 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up"
+                    data-aos-delay="100">
                     <ul>
                         <li><i class="bx bx-store-alt"></i>
                             <h5 class="mt-4">Profil Perusahaan</h5>

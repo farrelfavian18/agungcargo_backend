@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KarirController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\MasterBannerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,10 @@ Route::get('/', function () {
         'masterbanner' => $masterbanner
     ]);
 });
+
+// Route::get('/', function () {
+//        return view('admin.dashboard');
+// })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
 
 Route::get('/karir', function () {
     $karirs = DB::table('karirs')->get();
@@ -101,6 +106,7 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
+    Route::resource('/datakaryawan',KaryawanController::class);
 });
 
 Route::middleware('auth')->group(function () {
