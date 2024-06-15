@@ -34,10 +34,47 @@
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" rows="3" value="{{ $karyawan->alamat }}"
-                    placeholder="Enter ..."></textarea>
+                    placeholder="{{ old('alamat') ?? $karyawan->alamat }}"></textarea>
                 @error('alamat')
                 <span style="color:Red">{{ $message }}</span>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label for="no_telpon">No. Telepon</label>
+                <input type="text" id="no_telpon" name="no_telpon" class="form-control"
+                    value="{{ $karyawan->no_telpon }}">
+                @error('no_telpon')
+                <span style="color:Red">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- select -->
+                    <div class="form-group">
+                        <label>Agama</label>
+                        <select class="form-control select2" id="agama" name="agama" style="width: 100%;">
+                            <option value='Islam'>Islam</option>
+                            <option value='Katholik'>Katholik</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Kong Hu Chu">Kong Hu Chu</option>
+                        </select>
+                        @error('agama')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control select2" id="status" name="status" style="width: 100%;">
+                            <option value='menikah'>Aktif</option>
+                            <option value='belum menikah'>Non Aktif</option>
+                        </select>
+                        @error('status')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
             </div>
             {{-- <div class="form-group">
                 <label for="email">Foto Berita</label>
