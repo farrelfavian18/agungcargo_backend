@@ -16,10 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama');
+            $table->string('foto_karyawan')->nullable();
             $table->string('email')->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_telpon')->nullable();
-            $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
+            $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan'])->nullable();
             $table->enum('agama', ['Islam', 'Katholik','Kristen','Hindu','Buddha','Kong Hu Chu'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('tmpt_lahir')->nullable();

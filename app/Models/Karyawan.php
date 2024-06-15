@@ -9,4 +9,5 @@ class Karyawan extends Model
 {
     use HasFactory;
     protected $guarded =[];
+    protected $fillable = ['nama','foto_karyawan','email','no_hp','alamat'];
 }

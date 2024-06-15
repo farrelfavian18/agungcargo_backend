@@ -106,7 +106,8 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
-    Route::resource('/datakaryawan',KaryawanController::class);
+    Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
+    // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
 });
 
 Route::middleware('auth')->group(function () {

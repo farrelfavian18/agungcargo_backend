@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class KaryawanController extends Controller
 {
     /**
@@ -21,7 +21,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        //
+         return view("admin.karyawans.create");
     }
 
     /**
@@ -45,7 +45,17 @@ class KaryawanController extends Controller
      */
     public function edit(Karyawan $karyawan)
     {
-        //
+        // $karyawan= Karyawan::find( $karyawan->id );
+        // $berita = Berita::all();
+        // $berita = Berita::findOrFail($berita);
+        // dd($karyawan);
+        // $karyawan = Karyawan::find( $karyawan->id );
+
+        return view('admin.karyawans.edit', [
+            'karyawan' => $karyawan,
+            'user' => User::all(),
+        ]);
+        // return view('admin.karyawans.edit')->with('karyawan', $karyawan);
     }
 
     /**
@@ -53,7 +63,22 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required',
+            'foto_karyawan' => 'required',
+            'email' => 'required',
+            'alamat' => 'required'
+            
+        ]);
+        // dd($validated);
+        $fileName = time().$request->file('foto_karyawan')->getClientOriginalName();
+        $path = $request->file('foto_karyawan')->storeAs('images', $fileName,'public');
+        $validated['foto_karyawan'] = '/storage/'.$path;
+        Karyawan::where('id', $karyawan->id)->update($validated);
+        // Karyawan::where('id', $karyawan->id)->$karyawan->update( $validated);
+        
+
+        return to_route('datakaryawan.index')->with('message','Data Karyawan Telah Di Update');
     }
 
     /**
@@ -61,6 +86,7 @@ class KaryawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
-        //
+        $karyawan->delete();
+        return redirect()->route('datakaryawan.index')->with('message', 'Data Karyawan Berhasil di Hapus');
     }
 }
