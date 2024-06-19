@@ -179,7 +179,7 @@
                 </div>
 
                 <!-- SidebarSearch Form -->
-                <div class="form-inline">
+                {{-- <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                             aria-label="Search">
@@ -189,7 +189,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -244,6 +244,67 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Manajemen Karyawan
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-user {{ Request::route()->getName() == 'karyawan.index' ? 'active' : '' }}"
+                                        href="{{ url('/karyawan') }}">
+                                        <i></i>
+                                        <p>Data Karyawan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-check{{ Request::route()->getName() == 'presensi.index' ? 'active' : '' }}"
+                                        href="{{ url('/presensi') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <p>Presensi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                        href="{{ url('/admin/permissions') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <p>Cuti</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                        href="{{ url('/admin/permissions') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <p>Promosi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                        href="{{ url('/admin/permissions') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <p>Mutasi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                        href="{{ url('/admin/permissions') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <p>Demosi</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fas fa-window-close {{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                        href="{{ url('/admin/permissions') }}">
+                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                        <i></i>
+                                        <p>PHK</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'karyawan.index' ? 'active' : '' }}"
                                 href="{{ url('/karyawan') }}">
                                 <i class="nav-icon fas fa-columns"></i>
@@ -251,7 +312,16 @@
                                     Data Karyawan
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
+                        {{-- <li>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-window-close"></i>
+                                <p>
+                                    PHK
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                        </li> --}}
                         {{-- <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'beritas.index' ? 'active' : '' }}"
                                 href="{{ url('/beritas') }}">
@@ -266,7 +336,7 @@
                                 href="{{ url('/karirs') }}">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
-                                    Karir
+                                    Karir | Loker
                                 </p>
                             </a>
                         </li>

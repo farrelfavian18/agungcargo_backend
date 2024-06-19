@@ -31,7 +31,8 @@
     <!-- Template Main CSS File -->
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    {{-- <link href="assets/css/style.css" rel="stylesheet"> --}}
+    {{--
+    <link href="assets/css/style.css" rel="stylesheet"> --}}
 </head>
 
 
@@ -88,34 +89,33 @@
 
                     <li><a class="nav-link scrollto" href="{{ url('kontak') }}">Kontak</a></li>
                     @if (Route::has('login'))
-                        {{-- <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10"> --}}
+                    {{-- <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10"> --}}
                         @auth
-                            @role('admin')
-                                <li> <a class="nav-link scrollto" href="{{ url('/admindashboard') }}">Admin Panel</a>
-                                </li>
-                            @endrole
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
+                        @role('admin')
+                        <li> <a class="nav-link scrollto" href="{{ url('/admin/admindashboard') }}">Admin Panel</a>
+                        </li>
+                        @endrole
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
+                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-                            </li>
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </li>
                         @else
-                            <li>
-                                <a class="nav-link scrollto" href="{{ route('login') }}">Login</a>
-                            </li>
-                            <li>
-                                @if (Route::has('register'))
-                                    <a class="nav-link scrollto" href="{{ route('register') }} ">Register</a>
-                                @endif
-                            </li>
+                        <li>
+                            <a class="nav-link scrollto" href="{{ route('login') }}">Login sebagai Karyawan</a>
+                        </li>
+                        <li>
+                            @if (Route::has('register'))
+                            <a class="nav-link scrollto" href="{{ route('register') }} ">Register</a>
+                            @endif
+                        </li>
                         @endauth
-                    @endif
+                        @endif
                 </ul>
             </nav>
             <i class="bi bi-list mobile-nav-toggle"></i>

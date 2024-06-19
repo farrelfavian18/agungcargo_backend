@@ -1,5 +1,6 @@
 @include('landingpage.header')
-{{-- <?php include 'header.php'; ?> --}}
+{{--
+<?php include 'header.php'; ?> --}}
 
 <div style="background-image: url({{ asset('img/karir.jpg') }}); background-repeat: repeat-space; padding-top:260px; ">
     <div class="container" style="top:-140px; position:relative;">
@@ -12,7 +13,7 @@
     <div class="container" style="padding-left:10%;   ">
         <form class="row g-4">
 
-            <div class="col-lg-2">
+            {{-- <div class="col-lg-2">
                 <div class="form-group">
                     <div class="position-relative">
                         <label class="form-label"><strong><i class="bi bi-caret-down"></i> Lowongan
@@ -20,10 +21,10 @@
                         <input type="text" placeholder="Marketing" class="form-control">
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
                 <div class="form-group">
                     <div class="position-relative">
                         <label class="form-label"><strong><i class="bi bi-caret-down"></i> Kategori</strong></label>
@@ -37,9 +38,9 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
                 <div class="form-group">
                     <div class="position-relative">
                         <label class="form-label"><strong><i class="bi bi-caret-down"></i> Lokasi</strong></label>
@@ -53,13 +54,13 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
                 <div class="form-group" style="margin-top:-15px;">
                     <button class="btn btn-primary" submit="reset">Cari Lowongan</button>
                 </div>
-            </div>
+            </div> --}}
 
         </form>
     </div>
@@ -80,20 +81,19 @@
                 <th>More</th>
             </thead>
             @foreach ($karirs as $key)
-                <tbody>
+            <tbody>
 
-                    <tr>
-                        <td>
-                            <p><strong>{{ $key->nama_jabatan }}</strong></p>
-                            <p>{{ $key->kualifikasi }}</p>
-                        </td>
-                        <td>{{ $key->kategori_pekerjaan }}</td>
-                        <td class="align-top">{{ $key->lokasi }}</td>
-                        <td><a href="#" data-bs-toggle="modal"
-                                data-bs-target="#myModal{{ $key->id }}">Detail...</a>
-                        </td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td>
+                        <p><strong>{{ $key->nama_jabatan }}</strong></p>
+                        <p>{{ $key->kualifikasi }}</p>
+                    </td>
+                    <td>{{ $key->kategori_pekerjaan }}</td>
+                    <td class="align-top">{{ $key->lokasi }}</td>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#myModal{{ $key->id }}">Detail...</a>
+                    </td>
+                </tr>
+            </tbody>
             @endforeach
         </table>
     </div>
@@ -107,48 +107,48 @@
 
 
 @foreach ($karirs as $key)
-    <!-- The Modal -->
-    <div class="modal" id="myModal{{ $key->id }}" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
+<!-- The Modal -->
+<div class="modal" id="myModal{{ $key->id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Detail Lowongan Kerja</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Detail Lowongan Kerja</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <h4 class="text-primary">{{ $key->nama_jabatan }}</h4>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4 class="text-primary">{{ $key->nama_jabatan }}</h4>
 
-                    <p><i class="bi bi-building"></i> Lokasi : {{ $key->lokasi }}</p>
+                <p><i class="bi bi-building"></i> Lokasi : {{ $key->lokasi }}</p>
 
-                    <p><i class="bi bi-check2-square"></i> Kualifikasi :</p>
-                    <p>{{ $key->kualifikasi }}</p>
+                <p><i class="bi bi-check2-square"></i> Kualifikasi :</p>
+                <p>{{ $key->kualifikasi }}</p>
 
-                    <p><i class="bi bi-bookmark-plus"></i> Benefit :</p>
-                    <ul>
-                        <li> Gaji Pokok</li>
-                        <li> Insentif</li>
-                        <li> Asuransi BPJS</li>
-                        <li> Jenjang Karir</li>
-                    </ul>
+                <p><i class="bi bi-bookmark-plus"></i> Benefit :</p>
+                <ul>
+                    <li> Gaji Pokok</li>
+                    <li> Insentif</li>
+                    <li> Asuransi BPJS</li>
+                    <li> Jenjang Karir</li>
+                </ul>
 
-                    <p>Lamaran dapat ditujukan ke alamat email : <a
-                            href="mailto: hairing@agungcargo.com">hairing@agungcargo.com</a></p>
+                <p>Lamaran dapat ditujukan ke alamat email : <a
+                        href="mailto: hairing@agungcargo.com">hairing@agungcargo.com</a></p>
 
-                </div>
+            </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i
-                            class="bi bi-arrow-counterclockwise"></i> Kembali</button>
-                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i
+                        class="bi bi-arrow-counterclockwise"></i> Kembali</button>
             </div>
         </div>
-
     </div>
+
+</div>
 @endforeach
 
 
@@ -159,4 +159,5 @@
 <br />
 
 @include('landingpage.footer')
-{{-- <?php include 'footer.php'; ?> --}}
+{{--
+<?php include 'footer.php'; ?> --}}

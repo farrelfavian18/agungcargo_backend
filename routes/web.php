@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KarirController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\MasterBannerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\DB;
@@ -35,9 +37,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
 
-Route::get('/admindashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+// yg di bwh ini web di edit
+// Route::get('/admindashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+
+// Route::get('/admindashboard', function () {
+//     return view('admin.dashboard');
+// })->middleware(['auth', 'verified','role:admin|user'])->name('admindashboard');
+
 
 Route::get('/dashboard', function () {
     $masterbanner = DB::table('master_banners')->get();
@@ -96,6 +104,8 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
     Route::post('/users/{user}/permissions',[UserController::class,'givePermission'])->name('users.permissions');
     Route::delete('/users/{user}/permission{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
 
+    Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
+
     // //Berita
     // Route::get('/berita',[BeritaController::class,''])->name('');
 });
@@ -107,6 +117,7 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
     Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
+    Route::resource('/presensi',PresensiController::class);
     // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
 });
 
