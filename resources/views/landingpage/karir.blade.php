@@ -1,74 +1,18 @@
 @include('landingpage.header')
-{{--
-<?php include 'header.php'; ?> --}}
-
-<div style="background-image: url({{ asset('img/karir.jpg') }}); background-repeat: repeat-space; padding-top:260px; ">
-    <div class="container" style="top:-140px; position:relative;">
+<div style="background-image: url({{ asset('img/karir.jpg') }}); background-repeat: repeat-space; padding-top:100px; ">
+    {{-- <div class="container" style="top:-140px; position:relative;">
         <h3>Join With Us.</h3>
         <p>Mari berkarir bersama kami.</p>
-    </div>
+    </div> --}}
 </div>
 
 <section id="karir" class="contact">
-    <div class="container" style="padding-left:10%;   ">
-        <form class="row g-4">
-
-            {{-- <div class="col-lg-2">
-                <div class="form-group">
-                    <div class="position-relative">
-                        <label class="form-label"><strong><i class="bi bi-caret-down"></i> Lowongan
-                                Kerja</strong></label>
-                        <input type="text" placeholder="Marketing" class="form-control">
-                    </div>
-                </div>
-            </div> --}}
-
-
-            {{-- <div class="col-lg-3">
-                <div class="form-group">
-                    <div class="position-relative">
-                        <label class="form-label"><strong><i class="bi bi-caret-down"></i> Kategori</strong></label>
-                        <select name="asal" id="inputAsal" form="inputAsal" class="form-control">
-                            <option value="asal">- Kategori Pekerjaan -</option>
-                            <option value="jakarta">Staf Marketing</option>
-                            <option value="jakarta">Staf Administrasi</option>
-                            <option value="jakarta">IT Operation</option>
-                            <option value="jakarta">HRD Personalia</option>
-                            <option value="jakarta">Kurir</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- <div class="col-lg-3">
-                <div class="form-group">
-                    <div class="position-relative">
-                        <label class="form-label"><strong><i class="bi bi-caret-down"></i> Lokasi</strong></label>
-                        <select name="asal" id="inputAsal" form="inputAsal" class="form-control">
-                            <option value="asal">- Kantor Cabang -</option>
-                            <option value="jakarta">Jakarta</option>
-                            <option value="jakarta">Manado</option>
-                            <option value="jakarta">Batam</option>
-                            <option value="jakarta">Makasar</option>
-                            <option value="jakarta">Denpasar</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
-
-            {{-- <div class="col-lg-3">
-                <div class="form-group" style="margin-top:-15px;">
-                    <button class="btn btn-primary" submit="reset">Cari Lowongan</button>
-                </div>
-            </div> --}}
-
-        </form>
+    <div class="container" style="padding-left:20%;">
+        <div>
+            <h4>Lowongan Kerja yang tersedia</h4>
+        </div>
     </div>
-
-
-
 </section>
-
 
 <div class="container">
     <hr />
@@ -97,14 +41,10 @@
             @endforeach
         </table>
     </div>
-
     <br />
-
-
     <p><i style="font-size:12px;">"Waspada terhardap penipuan lowongan kerja yang mengatas namakan PT. Agung Wicaksana
             Utama Sakti (Agung Cargo).</i></p>
 </div>
-
 
 @foreach ($karirs as $key)
 <!-- The Modal -->
@@ -144,20 +84,28 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i
                         class="bi bi-arrow-counterclockwise"></i> Kembali</button>
+                <button type="button" class="btn btn-primary" onclick="kirimLamaran({{ $key->id }})">
+                    <i class=" bi bi-arrow-bar-up"></i></i>
+                    Kirim Lamaran
+                </button>
             </div>
         </div>
     </div>
 
 </div>
 @endforeach
-
-
-<br />
-<br />
-<br />
-<br />
-<br />
-
 @include('landingpage.footer')
-{{--
-<?php include 'footer.php'; ?> --}}
+
+<script>
+    function kirimLamaran(id) {
+        var path = "{{ route('lamaran.index', 'PLACEHOLDER') }}";
+        path = path.replace('PLACEHOLDER', id);
+        window.location.href = path;
+    }
+</script>
+
+{{-- <script>
+    function kirimLamaran(id) {
+        window.location.href = "{{ route('lamaran.index') }}/" + id;
+    }
+</script> --}}

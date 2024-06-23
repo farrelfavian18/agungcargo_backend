@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nama');
             $table->string('foto_karyawan')->nullable();
+            $table->string('jabatan')->nullable();
             $table->string('email')->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_telpon')->nullable();
@@ -24,10 +25,30 @@ return new class extends Migration
             $table->enum('agama', ['Islam', 'Katholik','Kristen','Hindu','Buddha','Kong Hu Chu'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('tmpt_lahir')->nullable();
-            $table->string('jabatan')->nullable();
-            $table->enum('status',['menikah', 'belum menikah'])->nullable();
+            $table->enum('status_hubungan',['menikah', 'belum menikah'])->nullable();
             $table->string('no_ktp')->nullable();
+            $table->string('pendidikan')->nullable();
+            $table->string('no_rekening')->nullable();
+            $table->enum('status_karyawan', ['Aktif', 'Non-Aktif'])->default('Aktif');
             $table->timestamps();
+
+            // old database
+            // $table->id();
+            // $table->unsignedBigInteger('users_id')->nullable();
+            // $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // $table->string('nama');
+            // $table->string('foto_karyawan')->nullable();
+            // $table->string('email')->nullable();
+            // $table->string('alamat')->nullable();
+            // $table->string('no_telpon')->nullable();
+            // $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan'])->nullable();
+            // $table->enum('agama', ['Islam', 'Katholik','Kristen','Hindu','Buddha','Kong Hu Chu'])->nullable();
+            // $table->date('tgl_lahir')->nullable();
+            // $table->string('tmpt_lahir')->nullable();
+            // $table->string('jabatan')->nullable();
+            // $table->enum('status',['menikah', 'belum menikah'])->nullable();
+            // $table->string('no_ktp')->nullable();
+            // $table->timestamps();
         });
     }
 

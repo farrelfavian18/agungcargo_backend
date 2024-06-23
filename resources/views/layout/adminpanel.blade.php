@@ -199,7 +199,7 @@
                with font-awesome or any other icon font library -->
                         @role('user')
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'dashboard' ? 'active' : '' }}"
+                            <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
                                 href="{{ url('/dashboard') }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -209,12 +209,20 @@
                         </li>
                         @endrole
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
+                                href="{{ url('/admin/admindashboard') }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Admin Panel
+                                    Roles & Permissions
                                     <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">2</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">

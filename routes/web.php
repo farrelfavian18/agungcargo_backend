@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KarirController;
+use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\MasterBannerController;
@@ -46,14 +47,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('admin.dashboard');
 // })->middleware(['auth', 'verified','role:admin|user'])->name('admindashboard');
 
+//DASHBOARD LANDINGPAGE
+// Route::get('/dashboard', function () {
+//     $masterbanner = DB::table('master_banners')->get();
+//     return view('landingpage.index',[
+//         'masterbanner' => $masterbanner
+//     ]);
+// })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     $masterbanner = DB::table('master_banners')->get();
     return view('landingpage.index',[
         'masterbanner' => $masterbanner
     ]);
-})->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
+})->name('dashboard');
 
+//LANDINGPAGE DEFAULT
 Route::get('/', function () {
     $masterbanner = DB::table('master_banners')->get();
     return view('landingpage.index',[
@@ -65,17 +74,24 @@ Route::get('/', function () {
 //        return view('admin.dashboard');
 // })->middleware(['auth', 'verified','role:admin|user'])->name('dashboard');
 
+//LANDINGPAGE KARIR
 Route::get('/karir', function () {
     $karirs = DB::table('karirs')->get();
     return view('landingpage.karir',[
         'karirs' =>$karirs
     ]);
-});
+})->name('landingpage.karir');
 
+//LANDINGPAGE LAMARAN
+Route::get('/lamaran/{karir}',[LamaranController::class,'index'])->name('lamaran.index');
+Route::post('/lamaran/kirim-lamaran', [LamaranController::class, 'store'])->name('lamaran.store');
+
+//LANDINGPAGE KONTAK
 Route::get('/kontak', function () {
     return view('landingpage.kontak');
 });
 
+//LANDINGPAGE CEKTARIF
 Route::get('/cektarif', function () {
     return view('landingpage.cektarif');
 });
