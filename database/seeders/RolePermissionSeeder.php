@@ -38,7 +38,7 @@ class RolePermissionSeeder extends Seeder
         // $rolePenulis->givePermissionTo('lihat-tulisan');
 
         Role::create(['name'=>'admin']);
-        Role::create(['name'=>'writer']);
+        Role::create(['name'=>'superadmin']);
         Role::create(['name'=>'user']);
 
     }

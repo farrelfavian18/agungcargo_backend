@@ -61,14 +61,14 @@
 
                 <li class="nav-item dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2"
+                        <img src="{{ asset('dist/img/profile.png') }}" class="user-image img-circle elevation-2"
                             alt="User Image">
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                            <img src="{{ asset('dist/img/profile.png') }}" class="img-circle elevation-2"
                                 alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
@@ -170,8 +170,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        <img src="{{ asset('dist/img/profile.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -349,6 +348,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'adminlamaran.edit' ? 'active' : '' }}"
+                                href="{{ url('admin/data-lamaran') }}">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Lamaran
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'masterbanner.index' ? 'active' : '' }}"
                                 href="{{ url('/masterbanner') }}">
                                 <i class="nav-icon far fa-image"></i>
@@ -466,7 +474,17 @@
     <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+    <script>
+        function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var output = document.getElementById('preview');
+                    output.src = reader.result;
+                    output.style.display = 'block';
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+    </script>
 
     <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     <script>

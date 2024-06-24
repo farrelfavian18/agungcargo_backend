@@ -6,23 +6,37 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @elseif(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+                    <div class="card-body"><a href="{{ route('karyawan.create') }}"
+                            class="btn btn-success align-items-right">Tambah Karyawan +</a>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lengkap</th>
+                                    <th>Nama Karyawan</th>
+                                    <th>Nama Akun</th>
                                     <th>Foto</th>
-                                    <th>Email</th>
                                     <th>Jabatan</th>
+                                    <th>Email</th>
                                     <th>Alamat</th>
                                     <th>No Telp</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Agama</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Tempat Lahir</th>
-                                    <th>Status</th>
+                                    <th>Status Hubungan</th>
                                     <th>No.KTP</th>
+                                    <th>Pendidikan</th>
+                                    <th>No Rekening</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -35,23 +49,27 @@
                                     <td scope="row">{{ $no++ }}</td>
                                     {{-- <td>{{ $item->id }}</td> --}}
                                     <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->users->name == 'null' ? 'N/A' : $item->users->name }}</td>
                                     <td>
                                         <img src="{{ asset($item->foto_karyawan) }}" width="100" height="100"
                                             class="img img-reponsive" />
                                     </td>
+                                    <td>{{ $item->jabatan }}</td>
                                     <td>{{ $item->email }}</td>
                                     {{-- <td>{{ $item->jabatans->nama_jabatan == 'null' ? 'N/A' :
                                         $item->jabatans->nama_jabatan }}
                                     </td> --}}
-                                    <td>{{ $item->jabatan }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->no_telpon }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->agama }}</td>
                                     <td>{{ $item->tgl_lahir }}</td>
                                     <td>{{ $item->tmpt_lahir }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    <td>{{ $item->status_hubungan }}</td>
                                     <td>{{ $item->no_ktp }}</td>
+                                    <td>{{ $item->pendidikan }}</td>
+                                    <td>{{ $item->no_rekening }}</td>
+                                    <td>{{ $item->status_karyawan }}</td>
                                     <td class="project-actions">
                                         <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
                                             <i class="fas fa-pencil-alt">

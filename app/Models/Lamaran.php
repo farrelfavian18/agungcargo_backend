@@ -12,7 +12,7 @@ class Lamaran extends Model
     protected $guarded = [];
      public function karirs()
     {
-        return $this->belongsTo(Karir::class);
+        return $this->belongsTo(Karir::class, 'karir_id');
     }
 }
 

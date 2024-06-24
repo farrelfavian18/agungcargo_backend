@@ -85,6 +85,7 @@ Route::get('/karir', function () {
 //LANDINGPAGE LAMARAN
 Route::get('/lamaran/{karir}',[LamaranController::class,'index'])->name('lamaran.index');
 Route::post('/lamaran/kirim-lamaran', [LamaranController::class, 'store'])->name('lamaran.store');
+Route::post('/lamaran/lamaran-terkirim', [LamaranController::class, 'show'])->name('lamaran.show');
 
 //LANDINGPAGE KONTAK
 Route::get('/kontak', function () {
@@ -119,7 +120,8 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
     Route::delete('/users/{user}/roles{role}',[UserController::class,'removeRole'])->name('users.roles.remove');
     Route::post('/users/{user}/permissions',[UserController::class,'givePermission'])->name('users.permissions');
     Route::delete('/users/{user}/permission{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
-
+    
+    Route::get('/data-lamaran',[LamaranController::class,'edit'])->name('lamaran.edit');
     Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
 
     // //Berita
@@ -132,7 +134,8 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
-    Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
+    // Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
+    Route::resource('/karyawan',KaryawanController::class);
     Route::resource('/presensi',PresensiController::class);
     // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
 });

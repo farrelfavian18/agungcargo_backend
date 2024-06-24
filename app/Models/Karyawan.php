@@ -9,5 +9,9 @@ class Karyawan extends Model
 {
     use HasFactory;
     protected $guarded =[];
-    protected $fillable = ['nama','foto_karyawan','email','no_hp','alamat'];
+    public function users()
+    {
+        return $this->belongsTo(User::class,'users_id');
+    }
+    // protected $fillable = ['nama','foto_karyawan','email','no_telpon','alamat'];
 }

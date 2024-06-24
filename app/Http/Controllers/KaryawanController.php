@@ -12,6 +12,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
+        $karyawan= Karyawan::with('users')->get('users_id');
         $karyawan = Karyawan::all();
         return view("admin.karyawans.index",compact("karyawan"));
     }
@@ -21,7 +22,8 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-         return view("admin.karyawans.create");
+        $user = User::all();
+        return view("admin.karyawans.create", compact("user"));
     }
 
     /**
@@ -29,7 +31,40 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validatedData = $request->validate([
+                'nama' => 'required',
+                'users_id' => 'required',
+                'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
+                'jabatan' => 'required',
+                'email' => 'required',
+                'alamat' => 'required',
+                'no_telpon' => 'required',
+                'jenis_kelamin' => 'required',
+                'agama' => 'required',
+                'tgl_lahir' => 'required',
+                'tmpt_lahir' => 'required',
+                'status_hubungan' => 'required',
+                'no_ktp' => 'required',
+                'pendidikan' => 'required',
+                'no_rekening' => 'required',
+                'status_karyawan' => 'required',  
+            ]);
+
+            $fotoKaryawanName = time().$request->file('foto_karyawan')->getClientOriginalName();
+            $fotoKaryawanPath = $request->file('foto_karyawan')->storeAs('images', $fotoKaryawanName,'public');
+            $validatedData['foto_karyawan'] = '/storage/'.$fotoKaryawanPath;
+
+            Karyawan::create($validatedData);
+
+            //  Mail::send('landingpage.kirimemail', [], function ($message) use ($request) {
+            //     $message->to($request->email)->subject('Lamaran Mail');});
+            // Mail::to($application->email)->send(new ApplicationReceived($application));
+
+            return redirect()->route('karyawan.index')->with('success', 'Data Karyawan berhasil di tambahkan');
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**

@@ -37,7 +37,7 @@
                     <input type="hidden" name="karir_id" value="{{ $karirs->first()->id }}">
                     <div class="form-group">
                         <label for="name">Nama Lengkap</label>
-                        <input type="text" name="nama" id="nama" class="form-control" value="Farrel" required>
+                        <input type="text" name="nama" id="nama" class="form-control" required>
                     </div>
                     <div>
                         @error('nama')<span style="color:Red">{{ $message }}</span> @enderror
@@ -63,8 +63,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input name="email" id="email type=" email" class="form-control"
-                                value="farrelfavian18@gmail.com" placeholder="Email">
+                            <input name="email" id="email type=" email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div>
@@ -84,7 +83,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                             </div>
-                            <input type="text" id="no_telpon" name="no_telpon" class="form-control" value="081234567890"
+                            <input type="text" id="no_telpon" name="no_telpon" class="form-control"
                                 oninput="this.value = this.value.replace(/\D/g,'')">
                             @error('no_telpon')
                             <span style="color:Red">{{ $message }}</span>
@@ -131,8 +130,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Tempat Lahir</label>
-                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" class="form-control" value="Palembang"
-                            required>
+                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" class="form-control" required>
                     </div>
                     <div>
                         @error('tmpt_lahir')<span style="color:Red">{{ $message }}</span> @enderror
@@ -148,7 +146,7 @@
                     <div class="form-group">
                         <label>No. KTP</label>
                         <div class="input-group">
-                            <input type="text" id="no_ktp" name="no_ktp" class="form-control" value="1234567890123456"
+                            <input type="text" id="no_ktp" name="no_ktp" class="form-control"
                                 oninput="this.value = this.value.replace(/\D/g,'')" minlength="16" maxlength="16">
                             @error('no_ktp')
                             <span style="color:Red">{{ $message }}</span>
@@ -171,7 +169,7 @@
                     <div class="form-group">
                         <label for="pengalaman_kerja">Pengalaman Kerja</label>
                         <textarea class="form-control" name="pengalaman_kerja" rows="3"
-                            placeholder="Masukan pengalaman kerja">Mewing, Rizzing</textarea>
+                            placeholder="Masukan pengalaman kerja"></textarea>
                         @error('pengalaman_kerja')
                         <span style=" color:Red">{{ $message }}</span>
                         @enderror

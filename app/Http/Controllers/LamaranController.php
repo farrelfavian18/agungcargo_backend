@@ -96,7 +96,7 @@ class LamaranController extends Controller
 
             Mail::to($request->email)->send(new LamaranMail());
 
-            return redirect()->route('landingpage.karir')->with('success', 'Lamaran anda berhasil dikirim silahkan periksa E-Mail anda');
+            return redirect()->route('lamaran.show')->with('success', 'Lamaran anda berhasil dikirim silahkan periksa E-Mail anda');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -108,7 +108,7 @@ class LamaranController extends Controller
      */
     public function show(Lamaran $lamaran)
     {
-        //
+        return view('landingpage.lamaranberhasil');
     }
 
     /**
@@ -116,16 +116,25 @@ class LamaranController extends Controller
      */
     public function edit(Lamaran $lamaran)
     {
-        //
+        // $lamaran= Lamaran::with('karirs')->get();
+        // return view('admin.lamaran.edit',compact('karirs'));
+        $lamaran= Lamaran::with('karirs')->get();
+        Lamaran::find($lamaran);
+        return view('admin.lamaran.edit',compact('lamaran'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lamaran $lamaran)
+    public function update(Lamaran $lamaran)
     {
-        //
+        // $karirs = Karir::where('id', $karir->id)->get();
     }
+    //     public function update(Request $request, Lamaran $lamaran, Karir $karir)
+    // {
+    //     $karirs = Karir::where('id', $karir->id)->get();
+    //     return view('admin.lamaran.index',compact('karirs'));
+    // }
 
     /**
      * Remove the specified resource from storage.
