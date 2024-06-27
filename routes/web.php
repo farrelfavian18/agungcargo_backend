@@ -104,7 +104,7 @@ Route::get('/cektarif', function () {
 //     ]);
 // });
 
-
+//role admin prefix admin
 Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(function(){
     Route::get('/',[IndexController::class,'index'])->name('index');
     Route::resource('/roles', RoleController::class);
@@ -121,6 +121,7 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
     Route::post('/users/{user}/permissions',[UserController::class,'givePermission'])->name('users.permissions');
     Route::delete('/users/{user}/permission{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
     
+    // Route::get('/data-lamaran',[LamaranController::class,'edit'])->name('lamaran.edit');
     Route::get('/data-lamaran',[LamaranController::class,'edit'])->name('lamaran.edit');
     Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
 
@@ -128,14 +129,31 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
     // Route::get('/berita',[BeritaController::class,''])->name('');
 });
 
-Route::middleware(['auth','role:admin|user'])->group(function () {
-    // Route::get('/berita',[BeritaController::class,'index'])->name('berita.index');
+//role admin only
+Route::middleware(['auth','role:admin'])->group(function(){
+    // Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
+    Route::resource('/karyawan',KaryawanController::class);
     Route::resource('/beritas', BeritaController::class);
-    // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
+
+    // //Berita
+    // Route::get('/berita',[BeritaController::class,''])->name('');
+});
+
+//role user(karyawan) dan admin
+Route::middleware(['auth','role:admin|user'])->group(function () {
+    
+    // Route::get('/berita',[BeritaController::class,'index'])->name('berita.index');
+    // Route::resource('/beritas', BeritaController::class);
+    // Route::post('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
+    // Route::resource('/karirs',KarirController::class);
+    // Route::resource('/masterbanner',MasterBannerController::class);
     // Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
-    Route::resource('/karyawan',KaryawanController::class);
+    // Route::resource('/karyawan',KaryawanController::class);
+    Route::post('/presensi-masuk/store',[PresensiController::class,'store']);
+    Route::get('/presensi-masuk',[PresensiController::class,'masuk'])->name('presensi.masuk');
+    Route::get('/presensi-keluar',[PresensiController::class,'keluar'])->name('presensi.keluar');
     Route::resource('/presensi',PresensiController::class);
     // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
 });

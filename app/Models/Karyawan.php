@@ -13,5 +13,10 @@ class Karyawan extends Model
     {
         return $this->belongsTo(User::class,'users_id');
     }
+
+    public function promosis()
+    {
+        return $this->hasMany(Promosi::class,'id_karyawans');
+    }
     // protected $fillable = ['nama','foto_karyawan','email','no_telpon','alamat'];
 }

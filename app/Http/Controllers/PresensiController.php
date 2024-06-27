@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presensi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PresensiController extends Controller
 {
@@ -15,21 +18,81 @@ class PresensiController extends Controller
         $presensi = Presensi::all();
         return view("admin.presensi.index",compact("presensi"));
     }
+    public function masuk()
+    {
+        $today = date('Y-m-d');
+        $id = Auth::user()->id;
+        $cek = DB::table('presensis')->where('tgl_presensi',$today)->where('users_id',$id)->count();
+        return view("user.presensi.masuk",compact('cek'));
+        // $presensi = Presensi::all();
+        // return view("user.presensi.masuk",compact("presensi"));
+    }
+    public function keluar()
+    {
+        $presensi = Presensi::all();
+        return view("user.presensi.keluar",compact("presensi"));
+    }
 
+    // public function presensicek(){
+    //     $today = date('Y-m-d');
+    //     $id = Auth::user()->id;
+    //     $cek = DB::table('presensis')->where('tgl_presensi',$today)->where('users_id',$id)->count();
+    //     return view("user.presensi.masuk",compact("cek"));
+    //     // $cek = DB::table('presensis')->where('users_id',$id)->where('tgl_presensi',$today)->first();
+    // }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $id = Auth::user()->id;
+        $tgl_presensi = date('Y-m-d');
+        $jam_presensi = date('H:i:s');
+        $image = $request->image;
+        // echo $image;
+        // die;
+        $folderPath = "public/uploads/presensi/";
+        $formatName = $id . "_" . $tgl_presensi;
+        $image_parts = explode(";base64,", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = $formatName . '.png';
+        $file = $folderPath . $fileName;
+
+        $cek = DB::table('presensis')->where('tgl_presensi',$tgl_presensi)->where('users_id',$id)->count();
+        if($cek > 0){
+            $data_pulang = [
+                'jam_keluar_presensi' => $jam_presensi,
+                'foto_keluar' => $fileName
+            ];
+            $update = DB::table('presensis')->where('tgl_presensi',$tgl_presensi)->where('users_id',$id)->update($data_pulang);
+            if($update){
+                echo "success|Terimakasih Telah Melakukan Presensi Pulang, Hati-Hati di Jalan|out";
+                Storage::put($file, $image_base64);
+        }else{
+            echo "error|Presensi Gagal silahkan coba lagi!|out";
+        }
+    }else{
+         $data = [
+            'users_id' => $id,
+            'status' => 'Hadir',
+            'tgl_presensi' => $tgl_presensi,
+            'jam_presensi' => $jam_presensi,
+            'foto_presensi' => $fileName
+        ];
+        $simpan = DB::table('presensis')->insert($data);
+        if($simpan){
+            echo "success|Presensi sukses, Selamat menjalankan tugas|in";
+            Storage::put($file, $image_base64);
+        }else{
+            echo "error|Presensi Gagal silahkan coba lagi!|in";
+        }
+    }
+       
     }
 
     /**

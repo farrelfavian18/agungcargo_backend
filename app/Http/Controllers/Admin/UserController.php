@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -16,13 +17,19 @@ class UserController extends Controller
         return view("admin.users.index", compact("users"));
     }
 
-    public function show(User $user)
+    public function store(Request $request)
     {
-        $roles = Role::all();
-        $permissions = Permission::all();
-
-        return view("admin.users.role", compact("user","roles","permissions"));
+        $password = $request->password ? $request->password : '12345678';
+        $validated = $request->validate([
+                'name' => 'required',
+                'email'=> ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+                'password' => Hash::make($password),
+            ]);
+        
+        User::create($validated);
+        return redirect()->route('adminuser.index')->with('message', 'User Created');
     }
+    
 
     public function assignRole(Request $request, User $user)
     {

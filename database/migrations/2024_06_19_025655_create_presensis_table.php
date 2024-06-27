@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('status', ['Hadir', 'Terlambat', 'Tidak Hadir', 'Izin', 'Cuti'])->default('Tidak Hadir');
+            $table->enum('status', ['Hadir', 'Terlambat', 'Tidak Hadir', 'Izin'])->default('Tidak Hadir');
+            $table->date('tgl_presensi')->nullable();
             $table->time('jam_presensi')->nullable();
             $table->time('jam_keluar_presensi')->nullable();
-            $table->date('tgl_presensi')->nullable();
+            $table->string('foto_presensi')->nullable();
+            $table->string('foto_keluar')->nullable();
             $table->timestamps();
         });
     }

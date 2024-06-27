@@ -17,10 +17,21 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css"
         integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+    .webcam-capture,
+    .webcam-capture video {
+        display: inline-block;
+        width: 100% !important;
+        margin: auto;
+        height: auto !important;
+        border-radius: 15px;
+    }
+</style>
 
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
@@ -199,10 +210,28 @@
                         @role('user')
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
-                                href="{{ url('/dashboard') }}">
+                                href="{{ url('/admin/admindashboard') }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'presensi.masuk' ? 'active' : '' }}"
+                                href="{{ url('/presensi-masuk') }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Presensi Masuk
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
+                                href="{{ url('/presensi-masuk') }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Presensi Keluar
                                 </p>
                             </a>
                         </li>
@@ -213,6 +242,24 @@
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'presensi.masuk' ? 'active' : '' }}"
+                                href="{{ url('/presensi-masuk') }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Presensi Masuk
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'presensi.keluar' ? 'active' : '' }}"
+                                href="{{ url('/presensi-keluar') }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Presensi Keluar
                                 </p>
                             </a>
                         </li>
@@ -447,90 +494,17 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="{{ asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}"></script>
-    <!-- AdminLTE for demo purposes -->
-    {{-- <script src="{{ asset('dist/js/demo.js') }}"></script> --}}
 
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        function previewImage(event) {
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var output = document.getElementById('preview');
-                    output.src = reader.result;
-                    output.style.display = 'block';
-                }
-                reader.readAsDataURL(event.target.files[0]);
-            }
-    </script>
-
-    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+    @include('layouts.script')
+    {{-- <script>
+        Webcam.set({
+                width: 480,
+                height: 640,
+                image_format: 'jpeg',
+                jpeg_quality: 75
             });
-            //Date picker
-            $('#reservationdate').datetimepicker({
-            format: 'L'
-            });
-            //Timepicker
-            $('#timepicker').datetimepicker({
-            format: 'LT'
-            })
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-            
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
-            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-            })
-            
-            $("input[data-bootstrap-switch]").each(function(){
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
-        });
-    </script>
+            Webcam.attach('.webcam-capture');
+    </script> --}}
 </body>
 
 </html>
