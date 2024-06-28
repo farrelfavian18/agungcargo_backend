@@ -22,7 +22,7 @@ class PresensiController extends Controller
     {
         $today = date('Y-m-d');
         $id = Auth::user()->id;
-        $cek = DB::table('presensis')->where('tgl_presensi',$today)->where('users_id',$id)->count();
+        $cek = DB::table('presensis')->where('tgl_presensi',$today)->where('users_id',$id)->get();
         return view("user.presensi.masuk",compact('cek'));
         // $presensi = Presensi::all();
         // return view("user.presensi.masuk",compact("presensi"));
@@ -33,16 +33,6 @@ class PresensiController extends Controller
         return view("user.presensi.keluar",compact("presensi"));
     }
 
-    // public function presensicek(){
-    //     $today = date('Y-m-d');
-    //     $id = Auth::user()->id;
-    //     $cek = DB::table('presensis')->where('tgl_presensi',$today)->where('users_id',$id)->count();
-    //     return view("user.presensi.masuk",compact("cek"));
-    //     // $cek = DB::table('presensis')->where('users_id',$id)->where('tgl_presensi',$today)->first();
-    // }
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         
@@ -57,12 +47,11 @@ class PresensiController extends Controller
         // echo $image;
         // die;
         $folderPath = "public/uploads/presensi/";
-        $formatName = $id . "_" . $tgl_presensi;
+        $formatName = $id . "_" . str_replace('-','',$tgl_presensi)."_".time()."_".mt_rand(1000,9999);
         $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
         $fileName = $formatName . '.png';
         $file = $folderPath . $fileName;
-
         $cek = DB::table('presensis')->where('tgl_presensi',$tgl_presensi)->where('users_id',$id)->count();
         if($cek > 0){
             $data_pulang = [
@@ -73,25 +62,63 @@ class PresensiController extends Controller
             if($update){
                 echo "success|Terimakasih Telah Melakukan Presensi Pulang, Hati-Hati di Jalan|out";
                 Storage::put($file, $image_base64);
+            }else{
+                echo "error|Presensi Gagal silahkan coba lagi!|out";
+            }
         }else{
-            echo "error|Presensi Gagal silahkan coba lagi!|out";
+            $data = [
+                'users_id' => $id,
+                'status' => 'Hadir',
+                'tgl_presensi' => $tgl_presensi,
+                'jam_presensi' => $jam_presensi,
+                'foto_presensi' => $fileName
+            ];
+            $simpan = DB::table('presensis')->insert($data);
+            if($simpan){
+                echo "success|Presensi sukses, Selamat menjalankan tugas|in";
+                Storage::put($file, $image_base64);
+            }else{
+                echo "error|Presensi Gagal silahkan coba lagi!|in";
+            }
         }
-    }else{
-         $data = [
-            'users_id' => $id,
-            'status' => 'Hadir',
-            'tgl_presensi' => $tgl_presensi,
-            'jam_presensi' => $jam_presensi,
-            'foto_presensi' => $fileName
-        ];
-        $simpan = DB::table('presensis')->insert($data);
-        if($simpan){
-            echo "success|Presensi sukses, Selamat menjalankan tugas|in";
-            Storage::put($file, $image_base64);
-        }else{
-            echo "error|Presensi Gagal silahkan coba lagi!|in";
-        }
-    }
+
+            $cekpresensi = Presensi::where([
+                ['users_id', '=', auth()->user()->id],
+                ['tgl_presensi', '=', $tgl_presensi]
+            ]);
+            if($cekpresensi->exists()){
+                echo "error|Kamu telah melakukan Presensi hari ini|out";
+            }else{
+                
+            }
+    //     if($cek > 0){
+    //         $data_pulang = [
+    //             'jam_keluar_presensi' => $jam_presensi,
+    //             'foto_keluar' => $fileName
+    //         ];
+    //         $update = DB::table('presensis')->where('tgl_presensi',$tgl_presensi)->where('users_id',$id)->update($data_pulang);
+    //         if($update){
+    //             echo "success|Terimakasih Telah Melakukan Presensi Pulang, Hati-Hati di Jalan|out";
+    //             Storage::put($file, $image_base64);
+    //     }else{
+    //         echo "error|Presensi Gagal silahkan coba lagi!|out";
+    //     }
+    // }else{
+    //      $data = [
+    //         'users_id' => $id,
+    //         'status' => 'Hadir',
+    //         'tgl_presensi' => $tgl_presensi,
+    //         'jam_presensi' => $jam_presensi,
+    //         'foto_presensi' => $fileName
+    //     ];
+    //     $simpan = DB::table('presensis')->insert($data);
+    //     if($simpan){
+    //         echo "success|Presensi sukses, Selamat menjalankan tugas|in";
+    //         Storage::put($file, $image_base64);
+    //     }else{
+    //         echo "error|Presensi Gagal silahkan coba lagi!|in";
+    //     }
+    // }
        
     }
 

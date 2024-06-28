@@ -219,19 +219,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'presensi.masuk' ? 'active' : '' }}"
-                                href="{{ url('/presensi-masuk') }}">
+                                href="{{ url('/presensi-karyawan') }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Presensi Masuk
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
-                                href="{{ url('/presensi-masuk') }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Presensi Keluar
+                                    Presensi
                                 </p>
                             </a>
                         </li>
@@ -247,19 +238,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'presensi.masuk' ? 'active' : '' }}"
-                                href="{{ url('/presensi-masuk') }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                href="{{ url('/presensi-karyawan') }}">
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Presensi Masuk
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'presensi.keluar' ? 'active' : '' }}"
-                                href="{{ url('/presensi-keluar') }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Presensi Keluar
+                                    Presensi
                                 </p>
                             </a>
                         </li>
@@ -316,35 +298,30 @@
                                 <li class="nav-item">
                                     <a class="nav-link fas fa-check{{ Request::route()->getName() == 'presensi.index' ? 'active' : '' }}"
                                         href="{{ url('/presensi') }}">
-                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
-                                        <p>Presensi</p>
+                                        <p>Data Presensi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
                                         href="{{ url('/admin/permissions') }}">
-                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
                                         <p>Cuti</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                        href="{{ url('/admin/permissions') }}">
-                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                    <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'promosi.index' ? 'active' : '' }}"
+                                        href="{{ url('/promosi') }}">
                                         <p>Promosi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
                                         href="{{ url('/admin/permissions') }}">
-                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
                                         <p>Mutasi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
                                         href="{{ url('/admin/permissions') }}">
-                                        {{-- <i class="far fa-circle nav-icon"></i> --}}
                                         <p>Demosi</p>
                                     </a>
                                 </li>

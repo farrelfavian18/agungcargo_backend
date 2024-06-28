@@ -63,7 +63,7 @@
                                     <td>{{ $item->no_telpon }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->agama }}</td>
-                                    <td>{{ $item->tgl_lahir }}</td>
+                                    <td>{{ Carbon\Carbon::parse($item->tgl_lahir)->format('d-m-Y') }}
                                     <td>{{ $item->tmpt_lahir }}</td>
                                     <td>{{ $item->status_hubungan }}</td>
                                     <td>{{ $item->no_ktp }}</td>

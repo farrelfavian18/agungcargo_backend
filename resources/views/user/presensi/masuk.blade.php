@@ -1,5 +1,5 @@
 @extends('layout.adminpanel')
-@section('title', 'Presensi Masuk')
+@section('title', 'Presensi Karyawan')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -25,7 +25,8 @@
                                 <div class="webcam-capture"></div>
                             </div>
                         </div>
-                        @if ($cek > 0 )
+                        @if ($cek->count() > 0 )
+                        @if ($cek->first()->jam_keluar_presensi == null)
                         <div class="row">
                             <div class="col">
                                 <button id="ambilpresensi" class="btn btn-warning btn-block">
@@ -36,11 +37,20 @@
                         @else
                         <div class="row">
                             <div class="col">
+                                Anda sudah melakukan presensi pulang hari ini
+                            </div>
+                        </div>
+                        @endif
+
+                        @else
+                        <div class="row">
+                            <div class="col">
                                 <button id="ambilpresensi" class="btn btn-primary btn-block">
                                     Presensi Masuk
                                 </button>
                             </div>
                         </div>
+
                         @endif
                         {{-- <div class="row">
                             <div class="col">
@@ -76,7 +86,7 @@
         });
         $.ajax({
             type: "POST",
-            url: '/presensi-masuk/store',
+            url: '/presensi-karyawan/store',
             data:{
                 _token: "{{ csrf_token() }}",
                 image: image

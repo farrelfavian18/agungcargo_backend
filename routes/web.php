@@ -12,6 +12,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\MasterBannerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromosiController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -151,10 +152,10 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::resource('/masterbanner',MasterBannerController::class);
     // Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
     // Route::resource('/karyawan',KaryawanController::class);
-    Route::post('/presensi-masuk/store',[PresensiController::class,'store']);
-    Route::get('/presensi-masuk',[PresensiController::class,'masuk'])->name('presensi.masuk');
-    Route::get('/presensi-keluar',[PresensiController::class,'keluar'])->name('presensi.keluar');
+    Route::post('/presensi-karyawan/store',[PresensiController::class,'store']);
+    Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
     Route::resource('/presensi',PresensiController::class);
+    Route::resource('/promosi',PromosiController::class);
     // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
 });
 
