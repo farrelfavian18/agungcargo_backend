@@ -124,7 +124,7 @@ Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(
     
     // Route::get('/data-lamaran',[LamaranController::class,'edit'])->name('lamaran.edit');
     Route::get('/data-lamaran',[LamaranController::class,'edit'])->name('lamaran.edit');
-    Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
+    // Route::get('/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
 
     // //Berita
     // Route::get('/berita',[BeritaController::class,''])->name('');
@@ -152,6 +152,7 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     // Route::resource('/masterbanner',MasterBannerController::class);
     // Route::resource('/karyawan',KaryawanController::class)->only(['index','update','edit','destroy']);
     // Route::resource('/karyawan',KaryawanController::class);
+    Route::get('/admin/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
     Route::post('/presensi-karyawan/store',[PresensiController::class,'store']);
     Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
     Route::resource('/presensi',PresensiController::class);

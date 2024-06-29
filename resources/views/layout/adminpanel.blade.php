@@ -205,11 +205,10 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
                         @role('user')
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
+                            <a class="nav-link {{ Request::route()->getName() == 'admindashboard' ? 'active' : '' }}"
                                 href="{{ url('/admin/admindashboard') }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -220,13 +219,47 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'presensi.masuk' ? 'active' : '' }}"
                                 href="{{ url('/presensi-karyawan') }}">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-tree"></i>
                                 <p>
                                     Presensi
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                href="{{ url('/admin/permissions') }}">
+                                <p>Ambil Cuti</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'promosi.index' ? 'active' : '' }}"
+                                href="{{ url('/promosi') }}">
+                                <p>Informasi Promosi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                href="{{ url('/admin/permissions') }}">
+                                <p>Informasi Mutasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                href="{{ url('/admin/permissions') }}">
+                                <p>Informasi Demosi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fas fa-window-close {{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
+                                href="{{ url('/admin/permissions') }}">
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                <i></i>
+                                <p>Informasi PHK</p>
+                            </a>
+                        </li>
                         @endrole
+
+                        @role('admin')
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'adminadmindashboard' ? 'active' : '' }}"
                                 href="{{ url('/admin/admindashboard') }}">
@@ -335,25 +368,7 @@
                                 </li>
                             </ul>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'karyawan.index' ? 'active' : '' }}"
-                                href="{{ url('/karyawan') }}">
-                                <i class="nav-icon fas fa-columns"></i>
-                                <p>
-                                    Data Karyawan
-                                </p>
-                            </a>
-                        </li> --}}
-                        {{-- <li>
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-window-close"></i>
-                                <p>
-                                    PHK
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li> --}}
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'beritas.index' ? 'active' : '' }}"
                                 href="{{ url('/beritas') }}">
                                 <i class="nav-icon fas fa-table"></i>
@@ -361,7 +376,7 @@
                                     Berita
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::route()->getName() == 'karirs.index' ? 'active' : '' }}"
                                 href="{{ url('/karirs') }}">
@@ -398,6 +413,8 @@
                                 </p>
                             </a>
                         </li>
+                    </ul>
+                    @endrole
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -411,7 +428,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>@yield('title')</h1>
+                            {{-- <h1>@yield('title')</h1> --}}
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
