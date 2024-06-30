@@ -13,6 +13,9 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\MasterBannerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromosiController;
+use App\Http\Controllers\DemosiController;
+use App\Http\Controllers\MutasiController;
+use App\Http\Controllers\PhkController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -105,7 +108,7 @@ Route::get('/cektarif', function () {
 //     ]);
 // });
 
-//role admin prefix admin
+//role admin prefix admin (ADMIN ONYL)
 Route::middleware(['auth','role:admin'])->name('admin')->prefix('admin')->group(function(){
     Route::get('/',[IndexController::class,'index'])->name('index');
     Route::resource('/roles', RoleController::class);
@@ -157,7 +160,18 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
     Route::resource('/presensi',PresensiController::class);
     Route::resource('/promosi',PromosiController::class);
+    Route::resource('/demosi',DemosiController::class);
+    Route::resource('/mutasi',MutasiController::class);
+    Route::resource('/phk',PhkController::class);
     // Route::patch('/datakaryawan/{datakaryawan}',[KaryawanController::class,'update'])->name('datakaryawan.update');
+});
+
+// VIEW UNTUK PROMOSI,DEMOSI,MUTASI,DAN PHK KARYAWAN USER/PROMOSI, DEMOSI DLL
+Route::middleware(['auth','role:admin|user'])->prefix('user')->group(function(){
+    Route::get('/promosi',[PromosiController::class,'promosiuser'])->name('promosiuser.index');
+    Route::get('/demosi',[DemosiController::class,'demosiuser'])->name('demosiuser.index');
+    Route::get('/mutasi',[MutasiController::class,'mutasiuser'])->name('mutasiuser.index');
+    Route::get('/phk',[PhkController::class,'phkuser'])->name('phkuser.index');
 });
 
 Route::middleware('auth')->group(function () {

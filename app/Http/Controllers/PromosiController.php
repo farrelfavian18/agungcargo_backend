@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Promosi;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class PromosiController extends Controller
 {
     /**
@@ -49,7 +49,7 @@ class PromosiController extends Controller
             $surat_promosiPath = $request->file('surat_promosi')->storeAs('surat_promosi', $suratPromosiName,'public');
             $valid['surat_promosi'] = '/storage/'.$surat_promosiPath;
         Promosi::create($valid);
-        redirect()->route('promosi.index')->with('message', 'Promosi Karyawan telah dibuat');
+        return redirect()->route('promosi.index')->with('message', 'Promosi Karyawan telah dibuat');
     }
 
     /**
@@ -74,6 +74,32 @@ class PromosiController extends Controller
     public function update(Request $request, Promosi $promosi)
     {
         //
+    }
+    
+    public function promosiuser()
+    {
+        $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
+        $user = Auth::user();
+        // $karyawans = $user->karyawans;
+        $promosis = Promosi::where('id_karyawans',$karyawans->id)->get();
+        // $promosis = Promosi::query();
+
+        // $promosis = $promosis->get();
+        
+        // return view('user.promosi.index', [
+        //     'promosis' => Promosi::with('karyawans')->where('id_karyawans', Auth::user()->id)->get(),
+        //     'karyawans' => Karyawan::all(),
+        // ]);
+
+
+        // Ambil id dari karyawans yang berelasi dengan user
+
+        // Ambil promosi yang berelasi dengan karyawan-karyawan tersebut
+        
+        // $promosikaryawan = Promosi::all();
+        // $promosikaryawan = Promosi::where('id_karyawans',$user->id)->get();
+        
+        return view('user.promosi.index',compact('promosis'));
     }
 
     /**

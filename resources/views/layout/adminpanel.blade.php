@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agung Cargo|Kepegawaian</title>
+    <title>Agung Cargo | @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -47,29 +47,6 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> --}}
-
                 <li class="nav-item dropdown user user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('dist/img/profile.png') }}" class="user-image img-circle elevation-2"
@@ -173,7 +150,7 @@
             <a href="../../index3.html" class="brand-link">
                 {{-- <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">Agung Cargo|Kepegawaian</span>
+                <span class="brand-text font-weight-light">Agung Cargo | Kepegawaian</span>
             </a>
 
             <!-- Sidebar -->
@@ -233,25 +210,25 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'promosi.index' ? 'active' : '' }}"
-                                href="{{ url('/promosi') }}">
+                                href="{{ url('/user/promosi') }}">
                                 <p>Informasi Promosi</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                href="{{ url('/admin/permissions') }}">
+                                href="{{ url('/user/mutasi') }}">
                                 <p>Informasi Mutasi</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                href="{{ url('/admin/permissions') }}">
+                                href="{{ url('/user/demosi') }}">
                                 <p>Informasi Demosi</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-window-close {{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                href="{{ url('/admin/permissions') }}">
+                                href="{{ url('/user/phk') }}">
                                 {{-- <i class="far fa-circle nav-icon"></i> --}}
                                 <i></i>
                                 <p>Informasi PHK</p>
@@ -347,20 +324,20 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                        href="{{ url('/admin/permissions') }}">
+                                    <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'mutasi.index' ? 'active' : '' }}"
+                                        href="{{ url('/mutasi') }}">
                                         <p>Mutasi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                        href="{{ url('/admin/permissions') }}">
+                                    <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'demosi.index' ? 'active' : '' }}"
+                                        href="{{ url('/demosi') }}">
                                         <p>Demosi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fas fa-window-close {{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                        href="{{ url('/admin/permissions') }}">
+                                    <a class="nav-link fas fa-window-close {{ Request::route()->getName() == 'phk.index' ? 'active' : '' }}"
+                                        href="{{ url('/phk') }}">
                                         {{-- <i class="far fa-circle nav-icon"></i> --}}
                                         <i></i>
                                         <p>PHK</p>

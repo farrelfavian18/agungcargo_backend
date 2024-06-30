@@ -1,5 +1,5 @@
 @extends('layout.adminpanel')
-@section('title', 'Demosi Karyawan')
+@section('title', 'Promosi Karyawan')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -15,8 +15,8 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <div class="card-body"><a href="{{ route('demosi.create') }}"
-                            class="btn btn-success align-items-right">Demosi Karyawan</a>
+                    <div class="card-body"><a href="{{ route('promosi.create') }}"
+                            class="btn btn-success align-items-right">Mutasikan Karyawan</a>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -24,23 +24,23 @@
                                     <th>Nama Karyawan</th>
                                     <th>Keterangan</th>
                                     {{-- <th>Surat Promosi</th> --}}
-                                    <th>Tanggal Demosi</th>
-                                    <th>Surat Demosi</th>
+                                    <th>Tanggal Mutasi</th>
+                                    <th>Surat Mutasi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                 $no = 1;
                                 @endphp
-                                @foreach ($demosi as $item)
+                                @foreach ($mutasi as $item)
                                 <tr>
                                     <td scope="row">{{ $no++ }}</td>
                                     <td>{{ $item->karyawans->nama == 'null' ? 'N/A' : $item->karyawans->nama }}</td>
                                     <td>{{ $item->keterangan }}</td>
-                                    <td>{{ Carbon\Carbon::parse($item->tanggal_demosi)->format(' d-m-Y ') }}
+                                    <td>{{ Carbon\Carbon::parse($item->tanggal_mutasi)->format(' d-m-Y ') }}
                                     </td>
-                                    <td><a href="{{ $item->surat_demosi }}"><button class="btn btn-success"
-                                                type="button">Lampiran</button><a>
+                                    <td><a href="{{ $item->surat_mutasi }}"><button class="btn btn-success"
+                                                type="button">Lihat Lampiran</button><a>
                                     </td>
 
                                     {{--

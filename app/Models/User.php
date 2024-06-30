@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Karyawan;
+use App\Models\Promosi;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class User extends Authenticatable
 {
@@ -28,6 +30,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Karyawan::class, 'users_id', 'id');
     }
+
+    //  public function promosi(): HasOneThrough
+    // {
+    //     return $this->hasManyThrough(Karyawan::class, Promosi::class);
+    // }
 
     /**
      * The attributes that should be hidden for serialization.

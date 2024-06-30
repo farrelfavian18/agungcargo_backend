@@ -8,6 +8,7 @@ use App\Models\Karyawan;
 use App\Models\User;
 use App\Models\Presensi;
 use App\Models\Berita;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -28,15 +29,15 @@ class DashboardController extends Controller
         // })->count();
         $notpresensicount = $karyawancount - $presensicount;
 
-        // $profilkaryawan = Karyawan::whereHas('users', function ($query) {
-        //     $query->whereColumn('users.id' == 'karyawans.users_id');
-        // })->get();
+        $user = Auth::user();
+
+        $profilkaryawan = Karyawan::where('users_id',$user->id)->get();
 
         $berita = Berita::all();
 
 
 
 
-        return view('admin.dashboard',compact('karyawan','karyawancount','user','karir','karircount','presensi','presensicount','notpresensicount','berita'));
+        return view('admin.dashboard',compact('karyawan','karyawancount','user','karir','karircount','presensi','presensicount','notpresensicount','user','profilkaryawan','berita'));
     }
 }

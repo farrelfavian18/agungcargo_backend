@@ -7,17 +7,6 @@
             <div class="card card-info card-outline">
                 <center>
                     <div class="card-body">
-                        {{-- <div class="form-group">
-                            <form action={{ route ('presensi.create') }} method="post">
-                                @csrf
-                                <div id="clock" style="font-size: 100px">
-                                </div>
-                                <div class="webcam-capture">
-
-                                </div>
-                                <button type="submit" class="btn btn-primary">Presensi Masuk</button>
-                            </form>
-                        </div> --}}
                         <div id="clock" style="font-size: 100px">
                         </div>
                         <div class="row" style="margin-top: 70px">
@@ -50,22 +39,13 @@
                                 </button>
                             </div>
                         </div>
-
                         @endif
-                        {{-- <div class="row">
-                            <div class="col">
-                                <button id="ambilpresensi" class="btn btn-primary btn-block">
-                                    Presensi Masuk
-                                </button>
-                            </div>
-                        </div> --}}
                     </div>
                 </center>
             </div>
         </div>
     </div>
 </section>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script> --}}
 @push('myscript')
 <script>
     Webcam.set({
