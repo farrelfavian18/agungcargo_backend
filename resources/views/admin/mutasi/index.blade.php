@@ -1,5 +1,5 @@
 @extends('layout.adminpanel')
-@section('title', 'Promosi Karyawan')
+@section('title', 'Mutasi Karyawan')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -15,7 +15,7 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <div class="card-body"><a href="{{ route('promosi.create') }}"
+                    <div class="card-body"><a href="{{ route('mutasi.create') }}"
                             class="btn btn-success align-items-right">Mutasikan Karyawan</a>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Models\Karyawan;
 
 class PresensiController extends Controller
 {
@@ -15,6 +16,7 @@ class PresensiController extends Controller
      */
     public function index()
     {
+        $karyawan= Karyawan::with('users')->get('users_id');
         $presensi = Presensi::all();
         return view("admin.presensi.index",compact("presensi"));
     }
@@ -144,6 +146,15 @@ class PresensiController extends Controller
     public function update(Request $request, Presensi $presensi)
     {
         //
+    }
+
+    public function filter(Request $request)
+    {
+        $start_date=$request->start_date;
+        $end_date=$request->end_date;
+
+        $presensifilter = Presensi::whereDate('tgl_presensi','>=',$start_date)->whereDate('tgl_presensi','<=',$end_date)->get();
+        return view('admin.presensi.index',compact('presensifilter'));
     }
 
     /**

@@ -11,151 +11,50 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Foto</th>
-                                    <th>Email</th>
-                                    <th>Jabatan</th>
-                                    <th>Alamat</th>
-                                    <th>No Telp</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Agama</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Tempat Lahir</th>
+                                    <th>Nama Karyawan</th>
                                     <th>Status</th>
-                                    <th>No.KTP</th>
-                                    <th>Aksi</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam Presensi</th>
+                                    <th>Foto Masuk</th>
+                                    <th>Jam Keluar</th>
+                                    <th>Foto Keluar</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                 $no = 1;
                                 @endphp
-                                @foreach ($karyawan as $item)
+                                @foreach ($presensi as $item)
                                 <tr>
                                     <td scope="row">{{ $no++ }}</td>
                                     {{-- <td>{{ $item->id }}</td> --}}
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->users->name }}</td>
                                     <td>
-                                        <img src="{{ asset($item->foto_karyawan) }}" width="100" height="100"
-                                            class="img img-reponsive" />
+                                        @if ($item->jam_presensi >='08:00')
+                                        <span class="badge badge-danger">Terlambat</span>
+                                        @else
+                                        <span class="badge badge-success">Hadir</span>
+                                        @endif
                                     </td>
-                                    <td>{{ $item->email }}</td>
-                                    {{-- <td>{{ $item->jabatans->nama_jabatan == 'null' ? 'N/A' :
-                                        $item->jabatans->nama_jabatan }}
-                                    </td> --}}
-                                    <td>{{ $item->jabatan }}</td>
-                                    <td>{{ $item->alamat }}</td>
-                                    <td>{{ $item->no_telpon }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->agama }}</td>
-                                    <td>{{ $item->tgl_lahir }}</td>
-                                    <td>{{ $item->tmpt_lahir }}</td>
-                                    <td>{{ $item->status }}</td>
-                                    <td>{{ $item->no_ktp }}</td>
-                                    <td class="project-actions">
-                                        <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
+
+                                    {{-- <td>{{ $item->status }}</td> --}}
+                                    <td>{{ Carbon\Carbon::parse($item->tgl_presensi)->format('d-m-Y') }}</td>
+                                    <td>{{ $item->jam_presensi }}</td>
+                                    <td>
+                                        <img src="{{ asset('storage/uploads/presensi/'.$item->foto_presensi) }}"
+                                            width="100" height="100" class="img img-reponsive" />
+                                    </td>
+                                    <td>{{ $item->jam_keluar_presensi }}</td>
+                                    <td>
+                                        <img src="{{ asset('storage/uploads/presensi/'.$item->foto_keluar) }}"
+                                            width="100" height="100" class="img img-reponsive" />
                                     </td>
                                 </tr>
                                 @endforeach
                                 </tfoot>
-                        </table>
-                    </div>
-
-                    {{-- BATAS --}}
-
-                    {{-- <div class="card-body p-0">
-                        <table class="table table-striped projects">
-                            <a href="{{ route('adminroles.create') }}" class="btn btn-success align-items-right">Create
-                                Roles +</a>
-                            <thead>
-                                <tr>
-                                    <th style="width: 1%">
-                                        #
-                                    </th>
-                                    <th style="width: 20%">
-                                        Roles Name
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($roles as $role)
-                                <tr>
-                                    <td>
-                                        #
-                                    </td>
-                                    <td>
-                                        <a>
-                                            {{ $role->name }}
-                                        </a>
-                                        <br />
-                                        <small>
-                                            {{ $role->created_at }}
-                                        </small>
-                                    </td>
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm" href="{{ route('adminroles.edit', $role->id) }}">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <form class="btn btn-danger btn-sm" method="POST"
-                                            action="{{ route('adminroles.destroy', $role->id) }}"
-                                            onsubmit="return confirm('Anda Yakin');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                {{-- <tr>
-                                    <td>
-                                        #
-                                    </td>
-                                    <td>
-                                        <a>
-                                            AdminLTE v3
-                                        </a>
-                                        <br />
-                                        <small>
-                                            Created 01.01.2019
-                                        </small>
-                                    </td>
-                                    <td>
-                                        <a>Admin</a>
-                                    </td>
-                                    <td class="project-state">
-                                        <span class="badge badge-success">Success</span>
-                                    </td>
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm" href="#">
-                                            <i class="fas fa-folder">
-                                            </i>
-                                            View
-                                        </a>
-                                        <a class="btn btn-info btn-sm" href="#">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="#">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr> --}}
-                                {{--
                             </tbody>
                         </table>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

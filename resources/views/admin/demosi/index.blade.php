@@ -1,5 +1,5 @@
 @extends('layout.adminpanel')
-@section('title', 'Demosi Karyawan')
+@section('title', 'Riwayat Demosi Karyawan')
 @section('content')
 <section class="content">
     <div class="container-fluid">

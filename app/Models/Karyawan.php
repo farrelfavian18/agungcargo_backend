@@ -41,5 +41,9 @@ class Karyawan extends Model
     {
         return $this->hasMany(Phk::class, 'id_karyawans', 'id');
     }
+    public function cuti()
+    {
+        return $this->hasMany(Cuti::class, 'id_karyawans', 'id');
+    }
     // protected $fillable = ['nama','foto_karyawan','email','no_telpon','alamat'];
 }

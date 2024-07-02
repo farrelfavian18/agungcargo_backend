@@ -159,6 +159,7 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::post('/presensi-karyawan/store',[PresensiController::class,'store']);
     Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
     Route::resource('/presensi',PresensiController::class);
+    Route::get('/presensi/filter',[PresensiController::class,'filter'])->name('presensi.filter');
     Route::resource('/promosi',PromosiController::class);
     Route::resource('/demosi',DemosiController::class);
     Route::resource('/mutasi',MutasiController::class);
