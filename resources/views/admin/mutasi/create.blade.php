@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="status_karyawan">Ganti Status Karyawan</label>
-            <select class="form-control" id="id_karyawans" name="id_karyawans">
+            <select class="form-control" id="status_karyawan" name="status_karyawan">
                 <option value="Non-Aktif">Non-Aktif</option>
                 <option value="Aktif">Aktif</option>
             </select>
@@ -35,7 +35,7 @@
             <label for="surat_promosi">Surat keterangan Mutasi</label>
             <div class="input-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="surat_promosi" id="surat_promosi" accept=".pdf">
+                    <input type="file" class="custom-file-input" name="surat_mutasi" id="surat_mutasi" accept=".pdf">
                     <label class="custom-file-label" for="cv">Choose
                         file</label>
                 </div>

@@ -14,7 +14,7 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        $mutasi = Mutasi::with('karyawans')->get('id_karyawans');
+        // $mutasi = Mutasi::with('karyawans')->get('id_karyawans');
         $mutasi = Mutasi::all();
         return view('admin.mutasi.index',compact('mutasi'));
     }

@@ -312,8 +312,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                        href="{{ url('/admin/permissions') }}">
+                                    <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'cuti.index' ? 'active' : '' }}"
+                                        href="{{ url('/cuti') }}">
                                         <p>Cuti</p>
                                     </a>
                                 </li>

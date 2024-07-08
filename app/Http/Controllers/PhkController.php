@@ -12,7 +12,8 @@ class PhkController extends Controller
      */
     public function index()
     {
-        //
+        $phk = Phk::all();
+        return view('admin.phk.index',compact('phk'));
     }
 
     /**

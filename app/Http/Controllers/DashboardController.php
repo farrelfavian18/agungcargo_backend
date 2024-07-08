@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $karircount = Karir::count();
 
         $presensi = Presensi::all();
-        $presensicount = Presensi::whereDate('created_at', today())->count();
+        $presensicount = Presensi::whereDate('tgl_presensi', today())->count();
 
         // $notpresensicount = Karyawan::whereDoesntHave('presensis', function ($query) {
         //     $query->whereDate('created_at', today());

@@ -16,6 +16,7 @@ use App\Http\Controllers\PromosiController;
 use App\Http\Controllers\DemosiController;
 use App\Http\Controllers\MutasiController;
 use App\Http\Controllers\PhkController;
+use App\Http\Controllers\CutiController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -159,8 +160,9 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::post('/presensi-karyawan/store',[PresensiController::class,'store']);
     Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
     Route::resource('/presensi',PresensiController::class);
-    Route::get('/presensi/filter',[PresensiController::class,'filter'])->name('presensi.filter');
+    Route::get('/filter',[PresensiController::class,'filter']);
     Route::resource('/promosi',PromosiController::class);
+    Route::resource('/cuti',CutiController::class);
     Route::resource('/demosi',DemosiController::class);
     Route::resource('/mutasi',MutasiController::class);
     Route::resource('/phk',PhkController::class);

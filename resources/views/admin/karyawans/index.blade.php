@@ -69,7 +69,14 @@
                                     <td>{{ $item->no_ktp }}</td>
                                     <td>{{ $item->pendidikan }}</td>
                                     <td>{{ $item->no_rekening }}</td>
-                                    <td>{{ $item->status_karyawan }}</td>
+                                    <td>
+                                        {{-- {{ $item->status_karyawan }} --}}
+                                        @if ($item->status_karyawan == 'Aktif')
+                                        <button class="btn btn-success">Aktif</button>
+                                        @else
+                                        <button class="btn btn-danger">Non-Aktif</button>
+                                        @endif
+                                    </td>
                                     <td class="project-actions">
                                         <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
                                             <i class="fas fa-pencil-alt">

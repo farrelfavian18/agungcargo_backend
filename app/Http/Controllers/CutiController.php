@@ -12,7 +12,10 @@ class CutiController extends Controller
      */
     public function index()
     {
-        //
+        // $cuti = Cuti::with('karyawans')->get('id_karyawans');
+        // $cuti = Cuti::all();
+        $cuti = Cuti::all();
+        return view('admin.cuti.index',compact('cuti'));
     }
 
     /**
