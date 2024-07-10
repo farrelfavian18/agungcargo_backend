@@ -49,7 +49,8 @@
                                     <td scope="row">{{ $no++ }}</td>
                                     {{-- <td>{{ $item->id }}</td> --}}
                                     <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->users->name == 'null' ? 'N/A' : $item->users->name }}</td>
+                                    {{-- <td>{{ $item->users->name == 'null' ? 'N/A' : $item->users->name }}</td> --}}
+                                    <td>{{ $item->users->name ?? 'NA' }}</td>
                                     <td>
                                         <img src="{{ asset($item->foto_karyawan) }}" width="100" height="100"
                                             class="img img-reponsive" />

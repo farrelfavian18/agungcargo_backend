@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Karir;
 use App\Models\Lamaran;
 use App\Mail\LamaranMail;
+use App\Mail\DiterimaMail;
+use App\Mail\DitolakMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\Karyawan;
@@ -136,27 +138,100 @@ class LamaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
-    {
-        $validatedData = $request->validate([
-                'nama' => 'required',
-                // 'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
-                'foto_karyawan' => 'required',
-                'jabatan' => 'required',
-                'email' => 'required',
-                'alamat' => 'required',
-                'no_telpon' => 'required',
-                'jenis_kelamin' => 'required',
-                'agama' => 'required',
-                'tgl_lahir' => 'required',
-                'tmpt_lahir' => 'required',
-                'status_hubungan' => 'required',
-                'no_ktp' => 'required',
-                'pendidikan' => 'required',
-            ]);
+    // public function update(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //             'nama' => 'required',
+    //             // 'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
+    //             'foto_karyawan' => 'required',
+    //             'jabatan' => 'required',
+    //             'email' => 'required',
+    //             'alamat' => 'required',
+    //             'no_telpon' => 'required',
+    //             'jenis_kelamin' => 'required',
+    //             'agama' => 'required',
+    //             'tgl_lahir' => 'required',
+    //             'tmpt_lahir' => 'required',
+    //             'status_hubungan' => 'required',
+    //             'no_ktp' => 'required',
+    //             'pendidikan' => 'required',
+    //         ]);
         
-        Karyawan::create($validatedData);
-        return redirect()->route('adminlamaran.edit')->with('message', 'Calon Karyawan telah diseleksi');
+    //     Karyawan::create($validatedData);
+    //     return redirect()->route('adminlamaran.edit')->with('message', 'Calon Karyawan telah diseleksi');
+    // }
+    public function update(Request $request, Lamaran $lamaran)
+    {
+        //
+        try {
+            $validatedData = $request->validate([
+            'status_lamaran' => 'required',
+            // 'keterangan' => '',
+            // 'tanggal' => '',
+        ]);
+
+        Lamaran::where('id', $lamaran->id)->update($validatedData);
+        $lamaran = Lamaran::find($lamaran->id);
+
+        if ($request->status_lamaran == 'Diterima') {
+            Karyawan::create([
+                // 'users_id' => Null,
+                'nama' => $request->nama,
+                'foto_karyawan' => $request->foto_karyawan,
+                'jabatan' => $request->jabatan,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'no_telpon' => $request->no_telpon,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'agama' => $request->agama,
+                'tgl_lahir' => $request->tgl_lahir,
+                'tmpt_lahir' => $request->tmpt_lahir,
+                'status_hubungan' => $request->status_hubungan,
+                'no_ktp' => $request->no_ktp,
+                'pendidikan' => $request->pendidikan,
+                // 'no_rekening' => Null,
+            ]);
+            Mail::to($request->email)->send(new DiterimaMail());
+        } else {
+            Mail::to($request->email)->send(new DitolakMail());
+        }
+        } catch (\Throwable $e) {
+            throw $e;
+        }
+        // $validatedData = $request->validate([
+        //     'status' => 'required',
+        //     // 'keterangan' => '',
+        //     // 'tanggal' => '',
+        // ]);
+
+        // Lamaran::where('id', $lamaran->id)->update($validatedData);
+        // $lamaran = Lamaran::find($lamaran->id);
+
+        // if ($request->status == 'Diterima') {
+        //     Karyawan::create([
+        //         'users_id' => Null,
+        //         'nama' => $request->nama,
+        //         'foto' => $request->foto_karyawan,
+        //         'jabatan' => $request->jabatan,
+        //         'email' => $request->email,
+        //         'alamat' => $request->alamat,
+        //         'telepon' => $request->no_telpon,
+        //         'jenis_kelamin' => $request->jenis_kelamin,
+        //         'agama' => $request->agama,
+        //         'tgl_lahir' => $request->tgl_lahir,
+        //         'tmpt_lahir' => $request->tmpt_lahir,
+        //         'status_hubungan' => $request->status_hubungan,
+        //         'no_ktp' => $request->no_ktp,
+        //         'pendidikan' => $request->pendidikan,
+        //         // 'no_rekening' => Null,
+        //     ]);
+        //     Mail::to($request->email)->send(new DiterimaMail());
+        // } else {
+        //     Mail::to($request->email)->send(new DitolakMail());
+        // }
+
+
+        return redirect()->route('adminlamaran.edit')->with('success', 'Status lamaran berhasil diubah');
     }
 
     /**
