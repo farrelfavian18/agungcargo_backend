@@ -48,7 +48,7 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="foto_karyawan" id="foto_karyawan"
                                     placeholder="" onchange="previewImage(event)" accept=".jpg, .jpeg, .png">
-                                <label class=" custom-file-label" for="exampleInputFile"></label>
+                                <label class=" custom-file-label" for="exampleInputFile">Choose File</label>
                             </div>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="cv" id="cv" accept=".pdf">
-                                <label class="custom-file-label" for="cv"></label>
+                                <label class="custom-file-label" for="cv">Choose File</label>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="ijazah" id="ijazah" accept=".pdf">
-                                <label class="custom-file-label" for="ijazah"></label>
+                                <label class="custom-file-label" for="ijazah">Choose File</label>
                             </div>
                         </div>
                     </div>

@@ -146,7 +146,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::resource('/masterbanner',MasterBannerController::class);
     Route::resource('/presensi',PresensiController::class);
     Route::patch('/lamaran/{lamaran}/update',[LamaranController::class,'update'])->name('lamaran.update');
-
+    Route::delete('/lamaran/{lamaran}/delete', [LamaranController::class, 'destroy'])->name('lamaran.destroy');
     // //Berita
     // Route::get('/berita',[BeritaController::class,''])->name('');
 });

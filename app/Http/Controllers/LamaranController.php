@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Karir;
 use App\Models\Lamaran;
 use App\Mail\LamaranMail;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use App\Mail\DiterimaMail;
 use App\Mail\DitolakMail;
 use Illuminate\Support\Facades\Mail;
@@ -191,6 +193,14 @@ class LamaranController extends Controller
                 'pendidikan' => $request->pendidikan,
                 // 'no_rekening' => Null,
             ]);
+             $usercreate = User::create([
+                'name' => $request->nama,
+                'email' => $request->email,
+                'email_verified_at' =>  now(),
+                'password' => bcrypt('12345678'),
+                // 'password' => Hash::make('12345678'),
+             ]);
+            $usercreate->assignRole('user');
             Mail::to($request->email)->send(new DiterimaMail());
         } else {
             Mail::to($request->email)->send(new DitolakMail());
@@ -239,6 +249,7 @@ class LamaranController extends Controller
      */
     public function destroy(Lamaran $lamaran)
     {
-        //
+        $lamaran->delete();
+        return redirect()->route('adminlamaran.edit')->with('success', 'Lamaran berhasil dihapus');
     }
 }

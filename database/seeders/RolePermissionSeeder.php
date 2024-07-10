@@ -40,6 +40,7 @@ class RolePermissionSeeder extends Seeder
         Role::create(['name'=>'admin']);
         Role::create(['name'=>'superadmin']);
         Role::create(['name'=>'user']);
+        Role::create(['name'=>'inactive']);
 
     }
 }

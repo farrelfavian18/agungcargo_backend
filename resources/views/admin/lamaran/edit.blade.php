@@ -74,7 +74,7 @@
                                     <td><a href="ijaz{{ $item->ijazah }}"><button class="btn btn-success"
                                                 type="button">Ijazah
                                     </td> --}}
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
                                     @if ($item->status == 'Diterima')
                                     <td><span class="badge badge-success">{{ $item->status_lamaran }}</span></td>
                                     @elseif($item->status == 'Ditolak')
@@ -99,19 +99,18 @@
                                                         data-id="{{ $item->id }}">Detail</a>
                                                     <div role="separator" class="dropdown-divider"></div>
                                                     <!-- Modal Show -->
-
-
                                                     <!-- Modal Hapus -->
-                                                    {{-- <form action="/lamaran/{{ $item->id }}/delete" method="post"
-                                                        id="deleteForm-{{ $item->id }}">
+                                                    <form class="dropdown-item" method="POST"
+                                                        action="{{ route('lamaran.destroy', $item->id) }}"
+                                                        onsubmit="return confirm('Anda Yakin');">
                                                         @csrf
-                                                        @method('delete')
-                                                        <button type="button" class="dropdown-item delete-button"
-                                                            data-id="{{ $item->id }}" data-toggle="modal"
-                                                            data-target="#deleteModal{{ $item->id }}">
-                                                            Delete
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item delete-button">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Hapus
                                                         </button>
-                                                    </form> --}}
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,37 +285,10 @@
                                                             value="{{ $item->no_ktp }}">
                                                     </div>
                                                 </div>
-                                                {{-- <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="">CV</label>
-                                                        <div class="form-group">
-                                                            <iframe src="{{ $item->cv }}" width="100%"
-                                                                height="400px"></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label for="">Ijazah</label>
-                                                        <div class="form-group">
-                                                            <iframe src="{{ $item->ijazah }}" width="100%"
-                                                                height="400px"></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <td>{{ $item->status_lamaran }}</td>
-                                <td class="project-actions">
-                                    <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Seleksi
-                                    </a>
-                                </td> --}}
                                 </tr>
                                 @endforeach
                                 </tfoot>
@@ -328,3 +300,7 @@
     </div>
 </section>
 @endsection
+{{-- @push('myscript')
+<script>
+
+</script> --}}

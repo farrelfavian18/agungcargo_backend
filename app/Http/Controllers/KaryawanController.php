@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 class KaryawanController extends Controller
 {
     /**
@@ -98,22 +99,41 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
-        $validated = $request->validate([
+        try {
+            $validatedData = $request->validate([
             'nama' => 'required',
-            'foto_karyawan' => 'required',
+            'users_id' => 'required',
+            'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
+            'jabatan' => 'required',
             'email' => 'required',
-            'alamat' => 'required'
-            
+            'alamat' => 'required',
+            'no_telpon' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'tgl_lahir' => 'required',
+            'tmpt_lahir' => 'required',
+            'status_hubungan' => 'required',
+            'no_ktp' => 'required',
+            'pendidikan' => 'required',
+            'no_rekening' => 'required',
+            'status_karyawan' => 'required',
         ]);
         // dd($validated);
+        // if (Storage::exists($karyawan->foto_karyawan) && $request->file('foto_karyawan')) {
+        //     Storage::delete($karyawan->foto_karyawan);
         $fileName = time().$request->file('foto_karyawan')->getClientOriginalName();
         $path = $request->file('foto_karyawan')->storeAs('images', $fileName,'public');
-        $validated['foto_karyawan'] = '/storage/'.$path;
-        Karyawan::where('id', $karyawan->id)->update($validated);
+        $validatedData['foto_karyawan'] = '/storage/'.$path;
+        
+         Karyawan::where('id', $karyawan->id)->update($validatedData);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+        
         // Karyawan::where('id', $karyawan->id)->$karyawan->update( $validated);
         
 
-        return to_route('datakaryawan.index')->with('message','Data Karyawan Telah Di Update');
+        return to_route('karyawan.index')->with('message','Data Karyawan Telah Di Update');
     }
 
     /**

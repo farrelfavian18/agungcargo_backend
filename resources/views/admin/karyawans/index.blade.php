@@ -26,7 +26,7 @@
                                     <th>Foto</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
-                                    <th>Alamat</th>
+                                    {{-- <th>Alamat</th>
                                     <th>No Telp</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Agama</th>
@@ -35,9 +35,10 @@
                                     <th>Status Hubungan</th>
                                     <th>No.KTP</th>
                                     <th>Pendidikan</th>
-                                    <th>No Rekening</th>
+                                    <th>No Rekening</th> --}}
                                     <th>Status</th>
                                     <th>Aksi</th>
+                                    <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,8 +61,8 @@
                                     {{-- <td>{{ $item->jabatans->nama_jabatan == 'null' ? 'N/A' :
                                         $item->jabatans->nama_jabatan }}
                                     </td> --}}
-                                    <td>{{ $item->alamat }}</td>
-                                    <td>{{ $item->no_telpon }}</td>
+                                    {{-- <td>{{ $item->alamat }}</td> --}}
+                                    {{-- <td>{{ $item->no_telpon }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->agama }}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tgl_lahir)->format('d-m-Y') }}
@@ -69,7 +70,7 @@
                                     <td>{{ $item->status_hubungan }}</td>
                                     <td>{{ $item->no_ktp }}</td>
                                     <td>{{ $item->pendidikan }}</td>
-                                    <td>{{ $item->no_rekening }}</td>
+                                    <td>{{ $item->no_rekening }}</td> --}}
                                     <td>
                                         {{-- {{ $item->status_karyawan }} --}}
                                         @if ($item->status_karyawan == 'Aktif')
@@ -85,6 +86,141 @@
                                             Edit
                                         </a>
                                     </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                                        data-target="#modalShowData-{{ $item->id }}"
+                                                        data-id="{{ $item->id }}">Detail</a>
+                                                    <div role="separator" class="dropdown-divider"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <div class="modal fade" id="modalShowData-{{ $item->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="modalTambahDataLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalTambahDataLabel">Detail Karyawan
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="fotoPelamar">Foto</label>
+                                                                <img src="{{ $item->foto_karyawan }}"
+                                                                    alt="foto karyawan" class="img-fluid"
+                                                                    name="foto_karyawan" height="400px">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="nama_lengkap">Nama</label>
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="nama" value="{{ $item->nama}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">No Telepon</label>
+                                                            <input type="text" readonly class="form-control"
+                                                                id="noTelpon" value="{{ $item->no_telpon }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="nama_lengkap">Jenis Kelamin</label><br>
+                                                                @if ($item->jenis_kelamin == 'Laki-Laki')
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="jenis_kelamin" value="Laki-Laki">
+                                                                @else
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="jenis_kelamin" value="Perempuan">
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">Email</label>
+                                                            <input type="text" readonly class="form-control"
+                                                                id="noTelpon" value="{{ $item->email }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="alamat">Alamat</label>
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="alamat" value="{{ $item->alamat }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">Tanggal Lahir</label>
+                                                            <input type="text" readonly class="form-control"
+                                                                id="tgl_lahir"
+                                                                value="{{ Carbon\Carbon::parse($item->tgl_lahir)->format('d-m-Y') }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="tempat_lahir">Tempat Lahir</label>
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="tmpt_lahir" value="{{ $item->tmpt_lahir }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">Agama</label>
+                                                            <input type="text" readonly class="form-control" id="agama"
+                                                                value="{{ $item->agama }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="pendidikan">Pendidikan</label>
+                                                                <input type="text" readonly class="form-control"
+                                                                    id="pendidikan" value="{{ $item->pendidikan }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">No KTP</label>
+                                                            <input type="text" readonly class="form-control" id="no_ktp"
+                                                                value="{{ $item->no_ktp }}">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">Jabatan</label>
+                                                            <input type="text" readonly class="form-control"
+                                                                id="jabatan" value="{{ $item->jabatan }}">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">No Rekening</label>
+                                                            <input type="text" readonly class="form-control"
+                                                                id="no_rekening" value="{{ $item->no_rekening }}">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="">Bergabung Pada</label>
+                                                            <input type="text" readonly class="form-control" id="no_ktp"
+                                                                value="{{ Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
                                 @endforeach
                                 </tfoot>
