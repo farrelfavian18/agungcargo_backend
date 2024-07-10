@@ -15,7 +15,6 @@
                                     <th>Jabatan</th>
                                     <th>Foto</th>
                                     <th>Email</th>
-                                    <th>Jabatan</th>
                                     <th>Alamat</th>
                                     <th>No Telp</th>
                                     <th>Jenis Kelamin</th>
@@ -63,27 +62,25 @@
                                     <td>{{ $item->no_ktp }}</td>
                                     <td>{{ $item->pendidikan }}</td>
                                     <td>{{ $item->pengalaman_kerja }}</td>
-                                    <td>{{ $item->cv }}</td>
-                                    <td>{{ $item->ijazah }}</td>
+                                    <td><a href="{{ $item->cv }}"><button class="btn btn-success" type="button">Lihat
+                                                CV</button><a>
+                                    </td>
+                                    <td><a href="{{ $item->ijazah }}"><button class="btn btn-success"
+                                                type="button">Lihat Ijazah</button><a>
+                                    </td>
+                                    {{-- <td><a href=".storage/{{ $item->cv }}"><button class="btn btn-success"
+                                                type="button">CV
+                                    </td>
+                                    <td><a href="ijaz{{ $item->ijazah }}"><button class="btn btn-success"
+                                                type="button">Ijazah
+                                    </td> --}}
                                     <td>{{ $item->created_at }}</td>
-                                    <td><a href="cv/{{ $item->cv }}"><button class="btn btn-success" type="button">CV
-                                    <td>
-                                    <td><a href="ijazah/{{ $item->ijazah }}"><button class="btn btn-success"
-                                                type="button">IJAZAH
-                                    <td>
                                     <td>{{ $item->status_lamaran }}</td>
                                     <td class="project-actions">
                                         <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
                                             <i class="fas fa-pencil-alt">
                                             </i>
-                                            Terima
-                                        </a>
-                                    </td>
-                                    <td class="project-actions">
-                                        <a class="btn btn-info btn-sm" href="{{ route('karyawan.edit', $item->id) }}">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Tolak
+                                            Seleksi
                                         </a>
                                     </td>
                                 </tr>

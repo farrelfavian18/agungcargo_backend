@@ -88,9 +88,12 @@ Route::get('/karir', function () {
 })->name('landingpage.karir');
 
 //LANDINGPAGE LAMARAN
+Route::get('/lamaran/lamaran-terkirim', function () {
+    return view('landingpage.lamaranberhasil');
+})->name('lamaran.show');;
 Route::get('/lamaran/{karir}',[LamaranController::class,'index'])->name('lamaran.index');
 Route::post('/lamaran/kirim-lamaran', [LamaranController::class, 'store'])->name('lamaran.store');
-Route::post('/lamaran/lamaran-terkirim', [LamaranController::class, 'show'])->name('lamaran.show');
+// Route::get('/lamaran/lamaran-terkirim', [LamaranController::class, 'show'])->name('lamaran.show');
 
 //LANDINGPAGE KONTAK
 Route::get('/kontak', function () {
@@ -141,6 +144,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::resource('/beritas', BeritaController::class);
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
+    Route::resource('/presensi',PresensiController::class);
+    Route::get('/lamaran/{lamaran}/edit',[LamaranController::class,'edit'])->name('lamaran.edit');
 
     // //Berita
     // Route::get('/berita',[BeritaController::class,''])->name('');
@@ -159,7 +164,6 @@ Route::middleware(['auth','role:admin|user'])->group(function () {
     Route::get('/admin/admindashboard',[DashboardController::class,'index'])->name('admindashboard');
     Route::post('/presensi-karyawan/store',[PresensiController::class,'store']);
     Route::get('/presensi-karyawan',[PresensiController::class,'masuk'])->name('presensi.masuk');
-    Route::resource('/presensi',PresensiController::class);
     Route::get('/filter',[PresensiController::class,'filter']);
     Route::resource('/promosi',PromosiController::class);
     Route::resource('/cuti',CutiController::class);
@@ -174,6 +178,7 @@ Route::middleware(['auth','role:admin|user'])->prefix('user')->group(function(){
     Route::get('/promosi',[PromosiController::class,'promosiuser'])->name('promosiuser.index');
     Route::get('/demosi',[DemosiController::class,'demosiuser'])->name('demosiuser.index');
     Route::get('/mutasi',[MutasiController::class,'mutasiuser'])->name('mutasiuser.index');
+    Route::get('/cuti',[CutiController::class,'cutiuser'])->name('cutiuser.index');
     Route::get('/phk',[PhkController::class,'phkuser'])->name('phkuser.index');
 });
 

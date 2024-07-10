@@ -7,6 +7,7 @@ use App\Models\Lamaran;
 use App\Mail\LamaranMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Models\Karyawan;
 use Illuminate\Support\Facades\Storage;
 
 class LamaranController extends Controller
@@ -96,7 +97,7 @@ class LamaranController extends Controller
 
             Mail::to($request->email)->send(new LamaranMail());
 
-            return redirect()->route('lamaran.show')->with('success', 'Lamaran anda berhasil dikirim silahkan periksa E-Mail anda');
+            return redirect()->route('lamaran.show');
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -106,7 +107,7 @@ class LamaranController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lamaran $lamaran)
+    public function show()
     {
         return view('landingpage.lamaranberhasil');
     }
@@ -123,18 +124,40 @@ class LamaranController extends Controller
         return view('admin.lamaran.edit',compact('lamaran'));
     }
 
+    public function seleksi(Lamaran $lamaran)
+    {
+        // $lamaran= Lamaran::with('karirs')->get();
+        // return view('admin.lamaran.edit',compact('karirs'));
+        $lamaran = Lamaran::with('karirs')->get();
+        Lamaran::find($lamaran);
+        return view('admin.lamaran.update',compact('lamaran'));
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Lamaran $lamaran)
+    public function update(Request $request)
     {
-        // $karirs = Karir::where('id', $karir->id)->get();
+        $validatedData = $request->validate([
+                'nama' => 'required',
+                // 'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
+                'foto_karyawan' => 'required',
+                'jabatan' => 'required',
+                'email' => 'required',
+                'alamat' => 'required',
+                'no_telpon' => 'required',
+                'jenis_kelamin' => 'required',
+                'agama' => 'required',
+                'tgl_lahir' => 'required',
+                'tmpt_lahir' => 'required',
+                'status_hubungan' => 'required',
+                'no_ktp' => 'required',
+                'pendidikan' => 'required',
+            ]);
+        
+        Karyawan::create($validatedData);
+        return redirect()->route('adminlamaran.edit')->with('message', 'Calon Karyawan telah diseleksi');
     }
-    //     public function update(Request $request, Lamaran $lamaran, Karir $karir)
-    // {
-    //     $karirs = Karir::where('id', $karir->id)->get();
-    //     return view('admin.lamaran.index',compact('karirs'));
-    // }
 
     /**
      * Remove the specified resource from storage.

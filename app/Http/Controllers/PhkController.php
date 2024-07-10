@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use App\Models\Phk;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PhkController extends Controller
@@ -54,6 +56,17 @@ class PhkController extends Controller
     public function update(Request $request, Phk $phk)
     {
         //
+    }
+
+    public function phkuser()
+    {
+        $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
+        $user = Auth::user();
+
+        $phk = Phk::where('id_karyawans',$karyawans->id)->get();
+        
+        
+        return view('user.phk.index',compact('phk'));
     }
 
     /**

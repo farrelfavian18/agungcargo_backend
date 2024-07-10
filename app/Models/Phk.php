@@ -9,6 +9,8 @@ class Phk extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id_karyawans','keterangan','surat_phk','tanggal_phk'];
+
     public function karyawans()
     {
         // return $this->belongsTo(Karyawan::class,'id_karyawans');

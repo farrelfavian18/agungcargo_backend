@@ -204,26 +204,26 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-calendar{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
-                                href="{{ url('/admin/permissions') }}">
+                                href="{{ url('/user/cuti') }}">
                                 <p>Ambil Cuti</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-arrow-up{{ Request::route()->getName() == 'promosi.index' ? 'active' : '' }}"
                                 href="{{ url('/user/promosi') }}">
-                                <p>Informasi Promosi</p>
+                                <p>Promosi Saya</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-suitcase{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
                                 href="{{ url('/user/mutasi') }}">
-                                <p>Informasi Mutasi</p>
+                                <p>Mutasi Saya</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fas fa-arrow-down{{ Request::route()->getName() == 'adminpermissions.index' ? 'active' : '' }}"
                                 href="{{ url('/user/demosi') }}">
-                                <p>Informasi Demosi</p>
+                                <p>Demosi Saya</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -231,7 +231,7 @@
                                 href="{{ url('/user/phk') }}">
                                 {{-- <i class="far fa-circle nav-icon"></i> --}}
                                 <i></i>
-                                <p>Informasi PHK</p>
+                                <p>PHK Saya</p>
                             </a>
                         </li>
                         @endrole

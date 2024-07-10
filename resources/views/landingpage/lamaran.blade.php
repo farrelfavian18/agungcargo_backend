@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <textarea class="form-control" name="alamat" rows="3"
-                            placeholder="Masukan alamat lengkap">Jalan Tembesu</textarea>
+                            placeholder="Masukan alamat lengkap"></textarea>
                         @error('alamat')
                         <span style="color:Red">{{ $message }}</span>
                         @enderror
@@ -179,8 +179,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="cv" id="cv" accept=".pdf">
-                                <label class="custom-file-label" for="cv">Choose
-                                    file</label>
+                                <label class="custom-file-label" for="cv"></label>
                             </div>
                         </div>
                     </div>
@@ -189,7 +188,7 @@
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="ijazah" id="ijazah" accept=".pdf">
-                                <label class=" custom-file-label" for="ijazah"></label>
+                                <label class="custom-file-label" for="ijazah"></label>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 @extends('layout.adminpanel')
-@section('title', 'Informasi Mutasi Saya')
+@section('title', 'Informasi PHK Saya')
 @section('content')
 <section class="content">
     <div class="container-fluid">
@@ -11,9 +11,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Mutasi</th>
+                                    <th>Nama</th>
                                     <th>Keterangan</th>
-                                    <th>Tanggal Mutasi</th>
+                                    <th>Tanggal PHK</th>
                                     <th>Surat Mutasi</th>
                                 </tr>
                             </thead>
@@ -21,14 +21,14 @@
                                 @php
                                 $no = 1;
                                 @endphp
-                                @foreach($mutasis as $item)
+                                @foreach($phk as $item)
                                 <tr>
                                     <td scope="row">{{ $no++ }}</td>
                                     <td>{{ $item->karyawans->nama}}</td>
                                     <td>{{ $item->keterangan }}</td>
-                                    <td>{{ Carbon\Carbon::parse($item->tanggal_mutasi)->format(' d-m-Y ') }}
+                                    <td>{{ Carbon\Carbon::parse($item->tanggal_phk)->format(' d-m-Y ') }}
                                     </td>
-                                    <td><a href="{{ $item->surat_mutasi }}"><button class="btn btn-success"
+                                    <td><a href="{{ $item->surat_phk }}"><button class="btn btn-success"
                                                 type="button">Lihat Lampiran</button><a>
                                     </td>
                                 </tr>

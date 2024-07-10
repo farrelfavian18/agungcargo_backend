@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cuti;
+use App\Models\Jeniscuti;
+use App\Models\Karyawan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CutiController extends Controller
@@ -23,7 +26,13 @@ class CutiController extends Controller
      */
     public function create()
     {
-        //
+        $karyawan  = Karyawan::all();
+        $jeniscuti = Jeniscuti::all();
+        $user = Auth::user();
+
+        $idkaryawancuti = Karyawan::where('users_id',$user->id)->first();
+        
+        return view('user.cuti.create',compact('karyawan','idkaryawancuti','jeniscuti'));
     }
 
     /**
@@ -31,7 +40,17 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $karyawan = Karyawan::find($request->id_karyawans);
+        $validated = $request->validate([
+            'jabatan' => 'required',
+        ]);
+        $karyawan->update($validated);
+        $valid = $request->all();
+        $suratPromosiName = time().$request->file('surat_promosi')->getClientOriginalName();
+            $surat_promosiPath = $request->file('surat_promosi')->storeAs('surat_promosi', $suratPromosiName,'public');
+            $valid['surat_promosi'] = '/storage/'.$surat_promosiPath;
+        Cuti::create($valid);
+        return redirect()->route('cutiuser.index')->with('message', 'Cuti Karyawan telah diajukan silahkan menunggu Validasi dari HRD');
     }
 
     /**
@@ -56,6 +75,17 @@ class CutiController extends Controller
     public function update(Request $request, Cuti $cuti)
     {
         //
+    }
+
+    public function cutiuser()
+    {
+        $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
+        $user = Auth::user();
+
+        $cutis = Cuti::where('users_id',$karyawans->id)->get();
+        
+        
+        return view('user.cuti.index',compact('cutis'));
     }
 
     /**
