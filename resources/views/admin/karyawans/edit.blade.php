@@ -73,7 +73,7 @@
             <div class="form-group">
                 <label for="alamat">Alamat</label>
                 <textarea class="form-control" name="alamat" rows="3"
-                    placeholder="{{ old('alamat') ?? $karyawan->alamat }}"></textarea>
+                    placeholder="">{{ old('alamat') ?? $karyawan->alamat }}</textarea>
                 @error('alamat')
                 <span style="color:Red">{{ $message }}</span>
                 @enderror

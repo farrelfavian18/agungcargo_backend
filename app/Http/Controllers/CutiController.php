@@ -74,7 +74,13 @@ class CutiController extends Controller
      */
     public function update(Request $request, Cuti $cuti)
     {
-        //
+        $validatedData = $request->validate([
+            'status' => 'required',
+        ]);
+    Cuti::where('id', $cuti->id)->update($validatedData);
+
+    return to_route('cuti.index')->with('message','Data Cuti Telah Di Update');
+
     }
 
     public function cutiuser()

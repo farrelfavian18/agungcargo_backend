@@ -14,7 +14,7 @@
             <select class="form-control" id="id_jenis_cuti" name="id_jenis_cuti">
                 <option value="" selected disabled>Pilih Jenis Cuti</option>
                 @foreach ($jeniscuti as $item)
-                <option value="{{ $item->id }}">{{ $item->jenis_cuti }} - {{ $item->jatah_cuti }}</option>
+                <option value="{{ $item->id }}">{{ $item->jenis_cuti }} - {{ $item->jatah_cuti }} Hari</option>
                 @endforeach
             </select>
         </div>

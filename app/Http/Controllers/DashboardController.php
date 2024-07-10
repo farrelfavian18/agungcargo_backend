@@ -32,12 +32,17 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $profilkaryawan = Karyawan::where('users_id',$user->id)->get();
+        $checkactive = Karyawan::where('users_id', $user->id)->first();
+        if ($checkactive->status_karyawan == "Non-Aktif") {
+            return view('landingpage.welcome');
+        }
 
         $berita = Berita::all();
+        // $checkactive = Karyawan::where('users_id',$user->id)->get();
+        
 
-
-
-
-        return view('admin.dashboard',compact('karyawan','karyawancount','user','karir','karircount','presensi','presensicount','notpresensicount','user','profilkaryawan','berita'));
+        return view('admin.dashboard',compact('karyawan','karyawancount','user','karir','karircount','presensi','presensicount','notpresensicount','user','profilkaryawan','berita','checkactive'));
+        
+        
     }
 }

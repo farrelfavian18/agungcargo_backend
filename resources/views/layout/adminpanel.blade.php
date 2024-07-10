@@ -290,6 +290,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'adminlamaran.edit' ? 'active' : '' }}"
+                                href="{{ url('admin/data-lamaran') }}">
+                                <i class="nav-icon fas fa-columns"></i>
+                                <p>
+                                    Lamaran
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -360,15 +369,6 @@
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     Karir | Loker
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::route()->getName() == 'adminlamaran.edit' ? 'active' : '' }}"
-                                href="{{ url('admin/data-lamaran') }}">
-                                <i class="nav-icon fas fa-columns"></i>
-                                <p>
-                                    Lamaran
                                 </p>
                             </a>
                         </li>
@@ -452,7 +452,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0
             </div>
-            <strong>Copyright &copy; 2023 <a href="https://agungcargo.com">Agung Cargo</a>.</strong> All rights
+            <strong>Copyright &copy; 2024 <a href="https://agungcargo.com">Agung Cargo</a>.</strong> All rights
             reserved.
         </footer>
 

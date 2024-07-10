@@ -118,12 +118,18 @@ class KaryawanController extends Controller
             'no_rekening' => 'required',
             'status_karyawan' => 'required',
         ]);
+        
         // dd($validated);
         // if (Storage::exists($karyawan->foto_karyawan) && $request->file('foto_karyawan')) {
         //     Storage::delete($karyawan->foto_karyawan);
+
         $fileName = time().$request->file('foto_karyawan')->getClientOriginalName();
         $path = $request->file('foto_karyawan')->storeAs('images', $fileName,'public');
         $validatedData['foto_karyawan'] = '/storage/'.$path;
+
+        // if ($request->status_karyawan == 'Non-Aktif') {
+        //     $karyawan->id->assignRole('inactive');
+        // }
         
          Karyawan::where('id', $karyawan->id)->update($validatedData);
         } catch (\Exception $e) {
@@ -142,6 +148,6 @@ class KaryawanController extends Controller
     public function destroy(Karyawan $karyawan)
     {
         $karyawan->delete();
-        return redirect()->route('datakaryawan.index')->with('message', 'Data Karyawan Berhasil di Hapus');
+        return redirect()->route('karyawan.index')->with('message', 'Data Karyawan Berhasil di Hapus');
     }
 }

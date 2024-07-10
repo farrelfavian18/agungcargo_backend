@@ -1,3 +1,5 @@
+{{-- @foreach ($profilkaryawan as $status )
+@if ($status->status_karyawan=='Aktif') --}}
 @extends('layout.adminpanel')
 @section('title','Dashboard')
 @section('content')
@@ -35,7 +37,6 @@
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $presensicount }}<sup style="font-size: 20px"></sup></h3>
-
                     <p>Karyawan Hadir</p>
                 </div>
                 <div class="icon">
@@ -139,3 +140,9 @@
         </div>
     </div>
     @endsection
+    {{-- @else
+    <div>
+        <h1>Agung Cargo | Akun anda di nonaktif silahkan hubungi HRD</h1>
+    </div>
+    @endif
+    @endforeach --}}

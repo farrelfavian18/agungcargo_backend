@@ -99,6 +99,17 @@
                                                         data-target="#modalShowData-{{ $item->id }}"
                                                         data-id="{{ $item->id }}">Detail</a>
                                                     <div role="separator" class="dropdown-divider"></div>
+                                                    <form class="dropdown-item" method="POST"
+                                                        action="{{ route('karyawan.destroy', $item->id) }}"
+                                                        onsubmit="return confirm('Anda Yakin');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item delete-button">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Hapus
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
