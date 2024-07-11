@@ -299,6 +299,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Request::route()->getName() == 'jeniscuti.index' ? 'active' : '' }}"
+                                href="{{ url('/jeniscuti') }}">
+                                <i class="nav-icon fas fa-tree"></i>
+                                <p>
+                                    Jenis Cuti
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>

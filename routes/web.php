@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JenisCutiController;
 use App\Http\Controllers\KarirController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\KaryawanController;
@@ -147,6 +148,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::resource('/karirs',KarirController::class);
     Route::resource('/masterbanner',MasterBannerController::class);
     Route::resource('/presensi',PresensiController::class);
+    Route::resource('/jeniscuti',JenisCutiController::class);
     Route::patch('/lamaran/{lamaran}/update',[LamaranController::class,'update'])->name('lamaran.update');
     Route::delete('/lamaran/{lamaran}/delete', [LamaranController::class, 'destroy'])->name('lamaran.destroy');
     // //Berita

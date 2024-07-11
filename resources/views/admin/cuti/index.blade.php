@@ -16,7 +16,6 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <a href="" class="btn btn-success align-items-right">Cuti Karyawan</a>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -30,7 +29,6 @@
                                     <th>Jumlah Hari</th>
                                     <th>Sisa Cuti</th>
                                     <th>Status</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +40,7 @@
                                     <td scope="row">{{ $no++ }}</td>
                                     {{-- <td>{{ $item->karyawans->nama == 'null' ? 'N/A' : $item->karyawans->nama }}
                                     </td> --}}
-                                    <td>Farrel Favian</td>
+                                    <td>{{ $item->users->name}}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tanggal_mulai)->format(' d-m-Y ') }}
                                     <td>{{ Carbon\Carbon::parse($item->tanggal_selesai)->format(' d-m-Y ') }}
                                     <td>{{ $item->keterangan }}</td>
@@ -69,10 +67,9 @@
                                                     <a class="dropdown-item" href="#" data-toggle="modal"
                                                         data-target="#modalEditData-{{ $item->id }}"
                                                         data-id="{{ $item->id }}">Validasi</a>
-                                                    <!-- Modal Show -->
-                                                    <!-- Modal Hapus -->
-                                                    {{-- <form class="dropdown-item" method="POST"
-                                                        action="{{ route('lamaran.destroy', $item->id) }}"
+                                                    <div role="separator" class="dropdown-divider"></div>
+                                                    <form class="dropdown-item" method="POST"
+                                                        action="{{ route('karyawan.destroy', $item->id) }}"
                                                         onsubmit="return confirm('Anda Yakin');">
                                                         @csrf
                                                         @method('DELETE')
@@ -81,7 +78,7 @@
                                                             </i>
                                                             Hapus
                                                         </button>
-                                                    </form> --}}
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

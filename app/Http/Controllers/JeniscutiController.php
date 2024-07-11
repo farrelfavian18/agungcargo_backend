@@ -12,7 +12,8 @@ class JeniscutiController extends Controller
      */
     public function index()
     {
-        //
+        $jeniscuti = Jeniscuti::all();
+        return view('admin.jeniscuti.index',compact('jeniscuti'));
     }
 
     /**
@@ -20,7 +21,8 @@ class JeniscutiController extends Controller
      */
     public function create()
     {
-        //
+        $jeniscuti = Jeniscuti::all();
+        return view('admin.jeniscuti.create',compact('jeniscuti'));
     }
 
     /**
@@ -28,7 +30,12 @@ class JeniscutiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+                'jenis_cuti' => 'required',
+                'jatah_cuti' => 'required',
+            ]);
+            Jeniscuti::create($validatedData);
+            return redirect()->route('jeniscuti.index')->with('success', 'Jenis Cuti berhasil di tambahkan');
     }
 
     /**
@@ -60,6 +67,7 @@ class JeniscutiController extends Controller
      */
     public function destroy(Jeniscuti $jeniscuti)
     {
-        //
+        $jeniscuti->delete();
+        return redirect()->route('jeniscuti.index')->with('message', 'Jenis Cuti telah dihapus');
     }
 }

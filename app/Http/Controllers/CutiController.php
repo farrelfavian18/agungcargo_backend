@@ -17,6 +17,7 @@ class CutiController extends Controller
     {
         // $cuti = Cuti::with('karyawans')->get('id_karyawans');
         // $cuti = Cuti::all();
+        $cuti = Cuti::with('users')->get('users_id');
         $cuti = Cuti::all();
         return view('admin.cuti.index',compact('cuti'));
     }
@@ -40,16 +41,18 @@ class CutiController extends Controller
      */
     public function store(Request $request)
     {
-        $karyawan = Karyawan::find($request->id_karyawans);
+        // $karyawan = Karyawan::find($request->id_karyawans);
         $validated = $request->validate([
-            'jabatan' => 'required',
+            'users_id' => 'required',
+            'id_jenis_cuti'=> 'required',
+            'tanggal_mulai'=> 'required',
+            'tanggal_selesai'=> 'required',
+            'keterangan'=> 'required',
+            'alasan_cuti' => 'required'
+
         ]);
-        $karyawan->update($validated);
-        $valid = $request->all();
-        $suratPromosiName = time().$request->file('surat_promosi')->getClientOriginalName();
-            $surat_promosiPath = $request->file('surat_promosi')->storeAs('surat_promosi', $suratPromosiName,'public');
-            $valid['surat_promosi'] = '/storage/'.$surat_promosiPath;
-        Cuti::create($valid);
+        $validated = $request->all();
+        Cuti::create($validated);
         return redirect()->route('cutiuser.index')->with('message', 'Cuti Karyawan telah diajukan silahkan menunggu Validasi dari HRD');
     }
 
@@ -85,10 +88,10 @@ class CutiController extends Controller
 
     public function cutiuser()
     {
-        $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
+        // $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
         $user = Auth::user();
 
-        $cutis = Cuti::where('users_id',$karyawans->id)->get();
+        $cutis = Cuti::where('users_id',$user->id)->get();
         
         
         return view('user.cuti.index',compact('cutis'));
@@ -99,6 +102,7 @@ class CutiController extends Controller
      */
     public function destroy(Cuti $cuti)
     {
-        //
+         $cuti->delete();
+        return redirect()->route('cuti.index')->with('message','Cuti Karyawan Telah Dihapus');
     }
 }

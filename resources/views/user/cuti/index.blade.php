@@ -28,8 +28,8 @@
                                     <th>Tanggal Selsai</th>
                                     <th>Keterangan</th>
                                     <th>Alasan</th>
-                                    <th>Jumlah Hari</th>
-                                    <th>Sisa Cuti</th>
+                                    {{-- <th>Jumlah Hari</th>
+                                    <th>Sisa Cuti</th> --}}
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -40,14 +40,14 @@
                                 @foreach($cutis as $item)
                                 <tr>
                                     <td scope="row">{{ $no++ }}</td>
-                                    <td>{{ $item->karyawans->nama}}</td>
-                                    <td>{{ $item->id_jenis__cuti }}</td>
+                                    <td>{{ $item->users->name}}</td>
+                                    <td>{{ $item->jeniscutis->jenis_cuti }}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tanggal_mulai)->format(' d-m-Y ') }}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tanggal_selesai)->format(' d-m-Y ') }}</td>
                                     <td>{{ $item->keterangan }}</td>
                                     <td>{{ $item->alasan_cuti }}</td>
-                                    <td>{{ $item->jumlah_hari }}</td>
-                                    <td>{{ $item->sisa_cuti }}</td>
+                                    {{-- <td>{{ $item->jumlah_hari }}</td>
+                                    <td>{{ $item->sisa_cuti }}</td> --}}
                                     <td>{{ $item->status }}</td>
                                 </tr>
                                 @endforeach

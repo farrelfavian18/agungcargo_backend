@@ -25,14 +25,14 @@
             <label>Tanggal Mulai Cuti</label>
             <div class="input-group date" data-target-input="nearest">
                 <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate"
-                    id="tanggal_mulai" name="tanggal_promosi" />
+                    id="tanggal_mulai" name="tanggal_mulai" />
             </div>
         </div>
         <div class="form-group">
             <label>Tanggal Selesai Cuti</label>
             <div class="input-group date" data-target-input="nearest">
                 <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate"
-                    id="tanggal_selesai" name="tanggal_promosi" />
+                    id="tanggal_selesai" name="tanggal_selesai" />
             </div>
         </div>
         <div class="form-group">
