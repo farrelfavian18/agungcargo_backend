@@ -48,14 +48,14 @@
                                     </td>
                                     <td>{{ $item->jam_keluar_presensi }}</td>
                                     <td>
-                                        {{-- @if ($item->jam_keluar_presensi >='08:00' && $item->jam_keluar_presensi
+                                        @if ($item->jam_keluar_presensi >='08:00' && $item->jam_keluar_presensi
                                         <= '16:00' ) <span class="badge badge-warning">Pulang Cepat</span>
                                             @elseif ($item->jam_keluar_presensi >='16:00' && $item->jam_keluar_presensi)
                                             <span class="badge badge-success">Pulang</span>
                                             @else
                                             <span class="badge badge-danger">Tidak Absen</span>
-                                            @endif --}}
-                                            @if ($item->jam_keluar_presensi >= $jadwal_jam_masuk &&
+                                            @endif
+                                            {{-- @if ($item->jam_keluar_presensi >= $jadwal_jam_masuk &&
                                             $item->jam_keluar_presensi
                                             <= '16:00' ) <span class="badge badge-warning">Pulang Cepat</span>
                                                 @elseif ($item->jam_keluar_presensi >= $jadwal_jam_keluar &&
@@ -63,22 +63,27 @@
                                                 <span class="badge badge-success">Pulang</span>
                                                 @else
                                                 <span class="badge badge-danger">Tidak Absen</span>
-                                                @endif
+                                                @endif --}}
                                     </td>
                                     <td>
                                         @php
                                         //jam presensi
                                         $jam_in = date("H:i",strtotime($item->jam_presensi));
                                         //jadwal masuk
-                                        $jadwal_masuk = date("H:i",strtotime("08:00"));
+                                        $jadwal_masuk = date("H:i",strtotime($item->jam_keluar_presensi));
 
-                                        $jam_presensi = $item->tgl_presensi." ".$jadwal_masuk;
+                                        $jadwal_jam_masuk = $item->tgl_presensi." ".$jadwal_masuk;
                                         $jam_presensi = $item->tgl_presensi." ".$jam_in;
+
                                         @endphp
                                         @php
                                         $terlambat = hitungjamTerlambat($jadwal_jam_masuk,$jam_presensi)
                                         @endphp
-                                        <a>Jam Kerja {{$terlambat}}</a>
+                                        {{-- <a>{{$terlambat}} Jam</a> --}}
+                                        {{-- @php
+                                        $jam_kerja = selisih("08:00:00", $item->jam_presensi);
+                                        @endphp --}}
+                                        <span class="badge badge-success">{{ $terlambat }}</span>
                                     </td>
                                     <td>
                                         <img src="{{ asset('storage/uploads/presensi/'.$item->foto_keluar) }}"
