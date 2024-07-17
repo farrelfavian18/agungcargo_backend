@@ -47,6 +47,15 @@
         <div>
             @error('foto_karyawan')<span style="color:Red">{{ $message }}</span> @enderror
         </div>
+        {{-- divisi --}}
+        <div class="form-group">
+            <label for="name">Divisi</label>
+            <input type="text" id="divisi" name="divisi" class="form-control" @error('divisi') is-invalid @enderror"
+                placeholder="Masukan Divisi">
+        </div>
+        <div>
+            @error('divisi')<span style="color:Red">{{ $message }}</span> @enderror
+        </div>
         {{-- jabatan --}}
         <div class="form-group">
             <label for="name">Jabatan</label>

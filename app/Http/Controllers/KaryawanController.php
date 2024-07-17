@@ -37,6 +37,7 @@ class KaryawanController extends Controller
                 'nama' => 'required',
                 'users_id' => 'required',
                 'foto_karyawan' => 'required|mimes:jpg,jpeg,png',
+                'divisi'=> 'required',
                 'jabatan' => 'required',
                 'email' => 'required',
                 'alamat' => 'required',

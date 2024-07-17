@@ -24,6 +24,7 @@
                                     <th>Nama Karyawan</th>
                                     <th>Nama Akun</th>
                                     <th>Foto</th>
+                                    <th>Divisi</th>
                                     <th>Jabatan</th>
                                     <th>Email</th>
                                     {{-- <th>Alamat</th>
@@ -51,11 +52,13 @@
                                     {{-- <td>{{ $item->id }}</td> --}}
                                     <td>{{ $item->nama }}</td>
                                     {{-- <td>{{ $item->users->name == 'null' ? 'N/A' : $item->users->name }}</td> --}}
+                                    <td>{{ $item->users->divisi }}</td>
                                     <td>{{ $item->users->name ?? 'NA' }}</td>
                                     <td>
                                         <img src="{{ asset($item->foto_karyawan) }}" width="100" height="100"
                                             class="img img-reponsive" />
                                     </td>
+                                    <td>{{ $item->divisi }}</td>
                                     <td>{{ $item->jabatan }}</td>
                                     <td>{{ $item->email }}</td>
                                     {{-- <td>{{ $item->jabatans->nama_jabatan == 'null' ? 'N/A' :

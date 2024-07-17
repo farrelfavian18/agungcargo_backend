@@ -55,10 +55,18 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Jabatan</label>
+                <label for="jabatan">Jabatan</label>
                 <input type="text" id="jabatan" name="jabatan" class="form-control"
                     value="{{ old('jabatan') ?? $karyawan->jabatan}}">
                 @error('jabatan')
+                <span style="color:Red">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="divisi">Divisi</label>
+                <input type="text" id="divisi" name="divisi" class="form-control"
+                    value="{{ old('divisi') ?? $karyawan->divisi}}">
+                @error('divisi')
                 <span style="color:Red">{{ $message }}</span>
                 @enderror
             </div>
