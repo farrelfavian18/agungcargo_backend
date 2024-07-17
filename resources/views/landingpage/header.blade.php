@@ -115,11 +115,13 @@
                         <li>
                             <a class="nav-link scrollto" href="{{ route('login') }}">Login sebagai Karyawan</a>
                         </li>
+                        {{-- @role('admin')
                         <li>
                             @if (Route::has('register'))
                             <a class="nav-link scrollto" href="{{ route('register') }} ">Register</a>
                             @endif
                         </li>
+                        @endrole --}}
                         @endauth
                         @endif
                 </ul>

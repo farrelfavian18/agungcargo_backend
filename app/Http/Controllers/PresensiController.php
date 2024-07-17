@@ -18,7 +18,9 @@ class PresensiController extends Controller
     {
         $karyawan= Karyawan::with('users')->get('users_id');
         $presensi = Presensi::all();
-        return view("admin.presensi.index",compact("presensi"));
+        $jadwal_jam_masuk = "08:00:00";
+        $jadwal_jam_keluar = "16:00:00";
+        return view("admin.presensi.index",compact("presensi","jadwal_jam_masuk","jadwal_jam_keluar"));
     }
     public function masuk()
     {

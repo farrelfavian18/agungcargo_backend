@@ -17,6 +17,8 @@
                                     <th>Jam Presensi</th>
                                     <th>Foto Masuk</th>
                                     <th>Jam Keluar</th>
+                                    <th>Status</th>
+                                    <th>Total Jam Kerja</th>
                                     <th>Foto Keluar</th>
                                 </tr>
                             </thead>
@@ -45,6 +47,39 @@
                                             width="100" height="100" class="img img-reponsive" />
                                     </td>
                                     <td>{{ $item->jam_keluar_presensi }}</td>
+                                    <td>
+                                        {{-- @if ($item->jam_keluar_presensi >='08:00' && $item->jam_keluar_presensi
+                                        <= '16:00' ) <span class="badge badge-warning">Pulang Cepat</span>
+                                            @elseif ($item->jam_keluar_presensi >='16:00' && $item->jam_keluar_presensi)
+                                            <span class="badge badge-success">Pulang</span>
+                                            @else
+                                            <span class="badge badge-danger">Tidak Absen</span>
+                                            @endif --}}
+                                            @if ($item->jam_keluar_presensi >= $jadwal_jam_masuk &&
+                                            $item->jam_keluar_presensi
+                                            <= '16:00' ) <span class="badge badge-warning">Pulang Cepat</span>
+                                                @elseif ($item->jam_keluar_presensi >= $jadwal_jam_keluar &&
+                                                $item->jam_keluar_presensi)
+                                                <span class="badge badge-success">Pulang</span>
+                                                @else
+                                                <span class="badge badge-danger">Tidak Absen</span>
+                                                @endif
+                                    </td>
+                                    <td>
+                                        @php
+                                        //jam presensi
+                                        $jam_in = date("H:i",strtotime($item->jam_presensi));
+                                        //jadwal masuk
+                                        $jadwal_masuk = date("H:i",strtotime("08:00"));
+
+                                        $jam_presensi = $item->tgl_presensi." ".$jadwal_masuk;
+                                        $jam_presensi = $item->tgl_presensi." ".$jam_in;
+                                        @endphp
+                                        @php
+                                        $terlambat = hitungjamTerlambat($jadwal_jam_masuk,$jam_presensi)
+                                        @endphp
+                                        <a>Jam Kerja {{$terlambat}}</a>
+                                    </td>
                                     <td>
                                         <img src="{{ asset('storage/uploads/presensi/'.$item->foto_keluar) }}"
                                             width="100" height="100" class="img img-reponsive" />
