@@ -80,24 +80,9 @@ class PromosiController extends Controller
     {
         $karyawans = Karyawan::where('users_id', Auth::user()->id)->first();
         $user = Auth::user();
-        // $karyawans = $user->karyawans;
+
         $promosis = Promosi::where('id_karyawans',$karyawans->id)->get();
-        // $promosis = Promosi::query();
-
-        // $promosis = $promosis->get();
         
-        // return view('user.promosi.index', [
-        //     'promosis' => Promosi::with('karyawans')->where('id_karyawans', Auth::user()->id)->get(),
-        //     'karyawans' => Karyawan::all(),
-        // ]);
-
-
-        // Ambil id dari karyawans yang berelasi dengan user
-
-        // Ambil promosi yang berelasi dengan karyawan-karyawan tersebut
-        
-        // $promosikaryawan = Promosi::all();
-        // $promosikaryawan = Promosi::where('id_karyawans',$user->id)->get();
         
         return view('user.promosi.index',compact('promosis'));
     }

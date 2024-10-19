@@ -18,11 +18,9 @@
         </div>
         <div class="form-group">
             <label for="jabatan">Jabatan Baru Karyawan</label>
-            <input type="text" id="" name="jabatan" class="form-control" @error('jabatan') is-invalid @enderror"
+            <input type="text" id="jabatan" name="jabatan" class="form-control" @error('jabatan') is-invalid @enderror"
                 placeholder="contoh: Staff Marketing">
         </div>
-
-
         <div class="form-group">
             <label for="name">Keterangan</label>
             <input type="text" id="keterangan" name="keterangan" class="form-control" @error('keterangan') is-invalid
